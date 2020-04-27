@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/foreverhappy/文档/课程学习/LXC-SoftwareTestingAndQualityAssurance/作业/实验5-测试覆盖率统计/ATM System - Lab 1 Version 1.1.jar"/>
+	<classpathentry kind="lib" path="/home/foreverhappy/文档/课程学习/SoftwareTestingAndQualityAssurance/作业/实验5-测试覆盖率统计/ATM System - Lab 1 Version 1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
