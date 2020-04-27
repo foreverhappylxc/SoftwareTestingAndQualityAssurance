@@ -1,0 +1,15 @@
+1. boolean contains(double value):  Returns the value within the range that is closest to the specified value.
+2. boolean equals(Object obj): Tests this object for equality with an arbitrary object.
+3. double getLength(): Returns the length of the range.
+4. double getLowerBound(): Returns the lower bound for the range.
+5. double getUpperBound(): Returns the upper bound for the range.
+6. String toString(): Returns a string representation of this Range.
+--------------------------------------------------------------------------
+LineFunction2D: A function in the form y = a + bx. 
+	double getValue(double x): Returns the function value.
+PowerFunction2D: A function of the form y = a * x ^ b. 
+	double getValue(double x): Returns the value of the function for a given input ('x').
+NormalDistributionFunction2D: 
+	double getMean():  Returns the mean for the function.
+	double getStandardDeviation(): Returns the standard deviation for the function.
+	double getValue(double x):  Returns the function value.

@@ -1,0 +1,5 @@
+1.华为云平台访问链接：https://classroom.devcloud.huaweicloud.com/
+
+2.ATM模拟系统，双击可直接打开。若不能打开：
+  在jar文件所在目录打开命令行，输入 java -jar "ATM System - Lab 1 Version 1.0.jar" 回车
+  完成测试前不要关闭命令行
