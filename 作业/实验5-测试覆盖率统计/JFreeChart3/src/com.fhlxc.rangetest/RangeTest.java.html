@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>RangeTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">RangeTest (14) (2020年4月28日 下午8:44:56)</a> &gt; <a href="../../index.html" class="el_group">JFreeChart3</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.fhlxc.rangetest</a> &gt; <span class="el_source">RangeTest.java</span></div><h1>RangeTest.java</h1><pre class="source lang-java linenums">package com.fhlxc.rangetest;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.After;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+/**
+* @author Xingchao Long
+* @date 2020年4月15日 下午2:22:04
+* @classname RangeTest
+* @description 
+*/
+
+@RunWith(Parameterized.class)
+public class RangeTest {
+    
+<span class="fc" id="L26">    enum Type {</span>
+<span class="fc" id="L27">        contains,</span>
+<span class="fc" id="L28">        getLength,</span>
+<span class="fc" id="L29">        getLowerBound,</span>
+<span class="fc" id="L30">        getUpperBound,</span>
+<span class="fc" id="L31">        toString,</span>
+<span class="fc" id="L32">        getCentralValue,</span>
+<span class="fc" id="L33">        constrain,</span>
+<span class="fc" id="L34">        intersects,</span>
+<span class="fc" id="L35">        intersects2,</span>
+<span class="fc" id="L36">        combine,</span>
+<span class="fc" id="L37">        expandToInclude,</span>
+<span class="fc" id="L38">        expand,</span>
+<span class="fc" id="L39">        shift,</span>
+<span class="fc" id="L40">        shift2,</span>
+<span class="fc" id="L41">        scale,</span>
+<span class="fc" id="L42">        equals,</span>
+<span class="fc" id="L43">        hashcode</span>
+    }
+    
+    private Range testRange;
+    private Range range;
+    private Type type;
+    private double low;
+    private double up;
+    private double arg;
+    private double anticipated;
+    private double lower1;
+    private double upper1;
+    
+    @Parameters(name = &quot;{0}: {index}&quot;)
+    public static Collection&lt;?&gt; data() {
+<span class="fc" id="L58">        return Arrays.asList(new Object[][] {</span>
+            //当类型为contains时，你四个参数是传入的值，第五个参数是1是true,0是false,最后两个参数无意义
+<span class="fc" id="L60">            {Type.contains, 1, 2, 1, 1, 0, 0}, //测试整数下边界，返回值为true</span>
+<span class="fc" id="L61">            {Type.contains, 1, 2, 2, 1, 0, 0}, //测试整数上边界,返回值为true</span>
+<span class="fc" id="L62">            {Type.contains, -1, 2, 1.1, 1, 0, 0}, //测试整数范围内的值,返回true</span>
+<span class="fc" id="L63">            {Type.contains, 1.2, 2.1, 1.2, 1, 0, 0}, //测试小数下边界,返回true</span>
+<span class="fc" id="L64">            {Type.contains, 1.2, 2.1, 2.1, 1, 0, 0}, //测试小数上边界,返回true</span>
+<span class="fc" id="L65">            {Type.contains, 1.2, 2.1, 2.09999999, 1, 0, 0}, //测试小数范围内的值,返回true</span>
+<span class="fc" id="L66">            {Type.contains, 1.2, 2.1, 2.100000000001, 0, 0, 0}, //测试小数范围上边界外(接近边界)的值,返回false</span>
+<span class="fc" id="L67">            {Type.contains, 1.2, 2.1, 1.199999999999, 0, 0, 0}, //测试小数范围下边界外(接近边界)的值,返回false</span>
+<span class="fc" id="L68">            {Type.contains, -3.2, -1.6, -1.699999, 1, 0, 0}, //测试负小数范围上边界的值(接近边界),返回true</span>
+<span class="fc" id="L69">            {Type.contains, -3.2, -1.6, -2, 1, 0, 0}, //测试负小数范围内的值,返回true</span>
+<span class="fc" id="L70">            {Type.contains, -3.2, -1.6, -3.199999, 1, 0, 0}, //测试负小数范围下边界的值(接近边界),返回true</span>
+<span class="fc" id="L71">            {Type.contains, -3.2, -1.6, -4, 0, 0, 0}, //测试负小数范围外的值(下边界),返回false</span>
+<span class="fc" id="L72">            {Type.contains, -3.2, -1.6, -1, 0, 0, 0}, //测试负小数范围外的值(上边界),返回false</span>
+<span class="fc" id="L73">            {Type.contains, 3, 2, -1, 0, 0, 0}, //TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为getLength时,传入的第四个参数无意义,最后两个参数无意义
+<span class="fc" id="L76">            {Type.getLength, 1.1, 2.1, 0, 1, 0, 0}, //测试范围为整数的情况,返回1</span>
+<span class="fc" id="L77">            {Type.getLength, 13, 16.8, 0, 3.8, 0, 0}, //测试范围为小数的情况,返回3.8</span>
+<span class="fc" id="L78">            {Type.getLength, 16.8, 16.8, 0, 0, 0, 0}, //测试范围为0的情况,返回0</span>
+<span class="fc" id="L79">            {Type.getLength, 16.00001, 16.0001, 0, 0.00009, 0, 0}, //测试多小数位,上下边界相近的情况,返回0.00009</span>
+<span class="fc" id="L80">            {Type.getLength, 41.798461, 56.461283794, 0, 14.662822794, 0, 0}, //测试更多小数位的情况,返回14.662822794</span>
+<span class="fc" id="L81">            {Type.getLength, -41.798461, 56.461283794, 0, 98.259744794, 0, 0}, //测试含负数的情况,返回98.259744794</span>
+<span class="fc" id="L82">            {Type.getLength, -41.798461, -33.461283794, 0, 8.337177206, 0, 0}, //测试边界都是负数的情况,返回8.337177206</span>
+<span class="fc" id="L83">            {Type.getLength, 71, 9, 0, 8.337177206, 0, 0},//TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为getLowerBound时,传入的第四个参数无意义,最后两个参数无意义
+<span class="fc" id="L86">            {Type.getLowerBound, 45.2, 50.3, 0, 45.2, 0, 0}, //测试正小数的下边界,返回45.2</span>
+<span class="fc" id="L87">            {Type.getLowerBound, -45.000002, 50.3, 0, -45.000002, 0, 0}, //测试负小数的下边界,返回-45.000002</span>
+<span class="fc" id="L88">            {Type.getLowerBound, 0.000001, 50.3, 0, 0.000001, 0, 0}, //测试正小数的下边界,返回0.000001</span>
+<span class="fc" id="L89">            {Type.getLowerBound, -2, 50.3, 0, -2, 0, 0}, //测试负整数的下边界,返回-2</span>
+<span class="fc" id="L90">            {Type.getLowerBound, 3, 50.3, 0, 3, 0, 0}, //测试正整数的下边界.返回3</span>
+<span class="fc" id="L91">            {Type.getLowerBound, 300, 50.3, 0, 3, 0, 0},//TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为getUpperBound时,传入的第四个参数无意义,最后两个参数无意义
+<span class="fc" id="L94">            {Type.getUpperBound, 45.2, 50.3, 0, 50.3, 0, 0}, //测试上边界小数的情况,返回50.3</span>
+<span class="fc" id="L95">            {Type.getUpperBound, -45.2, -0.3, 0, -0.3, 0, 0}, //测试上边界负小数的情况,返回-0.3</span>
+<span class="fc" id="L96">            {Type.getUpperBound, -3, -2.776756767, 0, -2.776756767, 0, 0}, //测试上边界多位小数情况,返回-2.776756767</span>
+<span class="fc" id="L97">            {Type.getUpperBound, 0, 0, 0, 0, 0, 0}, //测试上下边界都相等的情况,返回0</span>
+<span class="fc" id="L98">            {Type.getUpperBound, 10, 0, 0, 0, 0, 0},//TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为toString时,传入的第四五个参数无意义,最后两个参数无意义
+<span class="fc" id="L101">            {Type.toString, 23.1, 24, 0, 0, 0, 0}, //测试都为正数,但是不相等的情况,返回Range[23.1,24]</span>
+<span class="fc" id="L102">            {Type.toString, -41.798461, 56.461283794, 0, 0, 0, 0}, //测试下边界为负数的情况,返回Range[-41.798461,56.461283794]</span>
+<span class="fc" id="L103">            {Type.toString, 16.8, 16.8, 0, 0, 0, 0}, //测试上下边界相等的情况,返回Range[16.8,16.8]</span>
+<span class="fc" id="L104">            {Type.toString, -16.8, -16, 0, 0, 0, 0}, //测试都为负数的情况,返回Range[-16.8,-16]</span>
+<span class="fc" id="L105">            {Type.toString, 5, 4, 0, 0, 0, 0}, //TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为getCentralValue时第四个参数无意义，最后两个参数无意义
+<span class="fc" id="L108">            {Type.getCentralValue, -1, 1, 0, 0, 0, 0},</span>
+<span class="fc" id="L109">            {Type.getCentralValue, 1.726, 4.289, 0, 3.0075, 0, 0},</span>
+<span class="fc" id="L110">            {Type.getCentralValue, -4.926321, -4.88752223, 0, -4.906921615, 0, 0},</span>
+<span class="fc" id="L111">            {Type.getCentralValue, 4.926321, -4.88752223, 0, -4.906921615, 0, 0}, //TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为getConstrain时,最后两个参数无意义
+<span class="fc" id="L114">            {Type.constrain, -1, 1, 1, 1, 0, 0},</span>
+<span class="fc" id="L115">            {Type.constrain, -1, 1, -1, -1, 0, 0},</span>
+<span class="fc" id="L116">            {Type.constrain, -1, 1, -2, -1, 0, 0},</span>
+<span class="fc" id="L117">            {Type.constrain, -1, 1, 2, 1, 0, 0},</span>
+<span class="fc" id="L118">            {Type.constrain, -1, 1, 0.998654, 0.998654, 0, 0},</span>
+<span class="fc" id="L119">            {Type.constrain, 34, 1, 0.998654, 0.998654, 0, 0},//TODO 新加的测试用例，用来覆盖不符合的Range</span>
+            
+            //当类型为intersects时,第四个参数无意义
+<span class="fc" id="L122">            {Type.intersects, -1, 1, 0, 1, 1, 2},</span>
+<span class="fc" id="L123">            {Type.intersects, -1, 1, 0, 1, -3, -1},</span>
+<span class="fc" id="L124">            {Type.intersects, -1, 1, 0, 1, 0, 2},</span>
+<span class="fc" id="L125">            {Type.intersects, -1, 1, 0, 0, 2, 2},</span>
+<span class="fc" id="L126">            {Type.intersects, -1, 1, 0, 0, -3, -2},</span>
+<span class="fc" id="L127">            {Type.intersects, -1, 1, 0, 1, 1, 2},</span>
+<span class="fc" id="L128">            {Type.intersects, 5, 1, 0, 1, 1, 2}, //TODO 新加的测试用例，用来覆盖不符合的Range</span>
+<span class="fc" id="L129">            {Type.intersects, -1, 1, 0, 0, 0, -1}, //TODO 使得覆盖条件：b0 &lt;= upper b1 &lt; b0</span>
+            
+            //当类型为intersects2时，第四个参数无意义
+<span class="fc" id="L132">            {Type.intersects2, -1, 1, 0, 1, 1, 2},</span>
+<span class="fc" id="L133">            {Type.intersects2, 2, 1, 0, 1, 1, 2},</span>
+<span class="fc" id="L134">            {Type.intersects2, 1, 2, 0, 0, 3, 4},</span>
+            
+            //当类型为combine时，第四个参数和第五个参数无意义
+<span class="fc" id="L137">            {Type.combine, 2, 3, 0, 0, 3, 4},</span>
+<span class="fc" id="L138">            {Type.combine, 24, 3, 0, 0, 3, 4},</span>
+<span class="fc" id="L139">            {Type.combine, 0, 0, 0, 0, 3, 4},</span>
+<span class="fc" id="L140">            {Type.combine, 0, 0, 0, 0, 0, 0},</span>
+<span class="fc" id="L141">            {Type.combine, 0, 1, 0, 0, 0, 0},</span>
+<span class="fc" id="L142">            {Type.combine, -1, 0, 0, 0, 0, 0},</span>
+<span class="fc" id="L143">            {Type.combine, 0, 1, 0, 0, -2, 0},</span>
+<span class="fc" id="L144">            {Type.combine, -1, 0, 0, 0, 0, 2},</span>
+            
+            //当类型为expandToInclude时，第五个参数无意义，最后两个参数是预期值
+<span class="fc" id="L147">            {Type.expandToInclude, 1, 3, 4, 0, 1, 4},</span>
+<span class="fc" id="L148">            {Type.expandToInclude, 12, 3, 4, 0, 1, 4},</span>
+<span class="fc" id="L149">            {Type.expandToInclude, 0, 0, 4, 0, 4, 4},</span>
+<span class="fc" id="L150">            {Type.expandToInclude, 0, 2, 4, 0, 0, 4},</span>
+<span class="fc" id="L151">            {Type.expandToInclude, -1, 0, 4, 0, -1, 4},</span>
+<span class="fc" id="L152">            {Type.expandToInclude, -1, 0, -3, 0, -3, 0},</span>
+<span class="fc" id="L153">            {Type.expandToInclude, -2, 0, -1, 0, -2, 0},</span>
+            
+            //当类型为expand时，最后两个参数是预期值，中间是输入,前两个参数都为0表示输入为null
+<span class="fc" id="L156">            {Type.expand, 1, 3, 2, 4, -3, 11},</span>
+<span class="fc" id="L157">            {Type.expand, 15, 3, 2, 4, -3, 11},</span>
+<span class="fc" id="L158">            {Type.expand, 0, 0, 2, 4, 0, 0},</span>
+<span class="fc" id="L159">            {Type.expand, 0, 2, -6, 2, 9, 9},</span>
+<span class="fc" id="L160">            {Type.expand, -1, 0, 2, 4, -3, 4},</span>
+            
+            //当类型为shift时， 最后两个参数是预期值，第五个参数无意义
+<span class="fc" id="L163">            {Type.shift, 2, 4, 1, 0, 3, 5},</span>
+<span class="fc" id="L164">            {Type.shift, 22, 4, 1, 0, 3, 5},</span>
+            
+            //当类型为shift2时， 最后两个参数是预期值，第五个0表示false，1表示true
+<span class="fc" id="L167">            {Type.shift2, 2, 4, 1, 0, 3, 5},</span>
+<span class="fc" id="L168">            {Type.shift2, 25, 4, 1, 0, 3, 5},</span>
+<span class="fc" id="L169">            {Type.shift2, 0, 0, 1, 0, 3, 5},</span>
+<span class="fc" id="L170">            {Type.shift2, -2, 0, 1, 1, -1, 1},</span>
+<span class="fc" id="L171">            {Type.shift2, 0, 1, 1, 1, 1, 2},</span>
+<span class="fc" id="L172">            {Type.shift2, -2, 0, 1, 0, -1, 1},</span>
+            
+            //当类型为scale时， 最后两个参数是预期值，第五个参数无意义
+<span class="fc" id="L175">            {Type.scale, 2, 4, 2, 0, 4, 8},</span>
+<span class="fc" id="L176">            {Type.scale, 25, 4, 2, 0, 4, 8},</span>
+<span class="fc" id="L177">            {Type.scale, 0, 0, 1, 0, 0, 0},</span>
+<span class="fc" id="L178">            {Type.scale, 1, 2, -1, 0, 0, 0},</span>
+<span class="fc" id="L179">            {Type.scale, 0, 2, 1, 0, 0, 2},</span>
+<span class="fc" id="L180">            {Type.scale, -1, 0, 1, 0, -1, 0},</span>
+            
+            //当类型为equals时， 最后两个参数是预期值，第四个参数1是range类，0不是，第五个参数0表示false，1表示true，前两个参数为0，为null
+<span class="fc" id="L183">            {Type.equals, 2, 4, 1, 1, 2, 4},</span>
+<span class="fc" id="L184">            {Type.equals, 26, 4, 1, 1, 2, 4},</span>
+<span class="fc" id="L185">            {Type.equals, 1, 4, 0, 1, 2, 4},</span>
+<span class="fc" id="L186">            {Type.equals, 3, 4, 1, 0, 2, 4},</span>
+<span class="fc" id="L187">            {Type.equals, 2, 5, 1, 0, 2, 4},</span>
+            
+            //当类型为hashcode时， 第四个参数无意义，第五个参数是预期值，最后两个参数无意义
+<span class="fc" id="L190">            {Type.hashcode, 2, 4, 0, -2146435072, 0, 0},</span>
+<span class="fc" id="L191">            {Type.hashcode, 28, 4, 0, 1, 0, 0},</span>
+            
+        });
+    }
+    
+<span class="fc" id="L196">    public RangeTest(Type type, double low, double up, double arg, double anticipated, double lower1, double upper1) {</span>
+<span class="fc" id="L197">        this.type = type;</span>
+<span class="fc" id="L198">        this.low = low;</span>
+<span class="fc" id="L199">        this.up = up;</span>
+<span class="fc" id="L200">        this.arg = arg;</span>
+<span class="fc" id="L201">        this.anticipated = anticipated;</span>
+<span class="fc" id="L202">        this.lower1 = lower1;</span>
+<span class="fc" id="L203">        this.upper1 = upper1;</span>
+<span class="fc" id="L204">    }</span>
+    
+    @Before
+    public void setUp() throws Exception {
+        //testRange = new Range(low, up);
+        //range = new Range(lower1, upper1);
+<span class="fc" id="L210">    }</span>
+
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L214">        testRange = null;</span>
+<span class="fc" id="L215">        range = null;</span>
+<span class="fc" id="L216">    }</span>
+
+    @Test
+    public void testContains() {
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.contains);</span>
+        try {
+<span class="fc" id="L222">            testRange = new Range(low, up);</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">            if (anticipated == 0) {</span>
+<span class="fc" id="L224">                assertFalse(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,testRange.contains(arg));</span>
+<span class="fc" id="L225">            } else {</span>
+<span class="fc" id="L226">                assertTrue(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,testRange.contains(arg));</span>
+            }
+<span class="fc" id="L228">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L229">            assertTrue(true);</span>
+        }
+<span class="fc" id="L231">    }</span>
+    
+    @Test
+    public void testGetLength() {
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.getLength);</span>
+        try {
+<span class="fc" id="L237">            testRange = new Range(low, up);</span>
+<span class="fc" id="L238">            assertEquals(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,anticipated, testRange.getLength(), 0.0000001d);</span>
+<span class="fc" id="L239">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L240">            assertTrue(true);</span>
+        }
+<span class="fc" id="L242">    }</span>
+    
+    @Test
+    public void testGetLowerBound() {
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.getLowerBound);</span>
+        try {
+<span class="fc" id="L248">            testRange = new Range(low, up);</span>
+<span class="fc" id="L249">            assertEquals(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,anticipated, testRange.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L250">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L251">            assertTrue(true);</span>
+        }
+<span class="fc" id="L253">    }</span>
+    
+    @Test
+    public void testGetUpperBound() {
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.getUpperBound);</span>
+        try {
+<span class="fc" id="L259">            testRange = new Range(low, up);</span>
+<span class="fc" id="L260">            assertEquals(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,anticipated, testRange.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L261">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L262">            assertTrue(true);</span>
+        }
+<span class="fc" id="L264">    }</span>
+    
+    @Test
+    public void testToString() {
+<span class="fc bfc" id="L268" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.toString);</span>
+        try {
+<span class="fc" id="L270">            testRange = new Range(low, up);</span>
+<span class="fc" id="L271">            String string = &quot;Range[&quot;+ low + &quot;,&quot; + up + &quot;]&quot;;</span>
+<span class="fc" id="L272">            assertEquals(&quot;Range[&quot; + low + &quot;,&quot; + up + &quot;]&quot;,string, testRange.toString());</span>
+<span class="fc" id="L273">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L274">            assertTrue(true);</span>
+        }
+<span class="fc" id="L276">    }</span>
+    
+    @Test
+    public void testGetCentralValue() {
+<span class="fc bfc" id="L280" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.getCentralValue);</span>
+        try {
+<span class="fc" id="L282">            testRange = new Range(low, up);</span>
+<span class="fc" id="L283">            assertEquals(anticipated, testRange.getCentralValue(), 0.0000001d);</span>
+<span class="fc" id="L284">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L285">            assertTrue(true);</span>
+        }
+<span class="fc" id="L287">    }</span>
+    
+    @Test
+    public void testGetConstrain() {
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.constrain);</span>
+        try {
+<span class="fc" id="L293">            testRange = new Range(low, up);</span>
+<span class="fc" id="L294">            assertEquals(anticipated, testRange.constrain(arg), 0.0000001d);</span>
+<span class="fc" id="L295">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L296">            assertTrue(true);</span>
+        }
+<span class="fc" id="L298">    }</span>
+    
+    @Test
+    public void testIntersects() {
+<span class="fc bfc" id="L302" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.intersects);</span>
+        try {
+<span class="fc" id="L304">            testRange = new Range(low, up);</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">            if (anticipated == 1) {</span>
+<span class="fc" id="L306">                assertTrue(testRange.intersects(lower1, upper1));</span>
+<span class="fc" id="L307">            } else {</span>
+<span class="fc" id="L308">                assertFalse(testRange.intersects(lower1, upper1));</span>
+            }
+<span class="fc" id="L310">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L311">            assertTrue(true);</span>
+        }
+<span class="fc" id="L313">    }</span>
+    
+    @Test 
+    public void testIntersects2() {
+<span class="fc bfc" id="L317" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.intersects2);</span>
+        try {
+<span class="fc" id="L319">            testRange = new Range(low, up);</span>
+<span class="fc" id="L320">            range = new Range(lower1, upper1);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">            if (anticipated == 1) {</span>
+<span class="fc" id="L322">                assertTrue(testRange.intersects(range));</span>
+<span class="fc" id="L323">            } else {</span>
+<span class="fc" id="L324">                assertFalse(testRange.intersects(range));</span>
+            }
+<span class="fc" id="L326">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L327">            assertTrue(true);</span>
+        }
+<span class="fc" id="L329">    }</span>
+    
+    @Test 
+    public void testCombine() {
+<span class="fc bfc" id="L333" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.combine);</span>
+        try {
+<span class="fc" id="L335">            testRange = new Range(low, up);</span>
+<span class="fc" id="L336">            range = new Range(lower1, upper1);</span>
+<span class="fc bfc" id="L337" title="All 4 branches covered.">            if (up == 0 &amp;&amp; low == 0) {</span>
+<span class="fc" id="L338">                testRange = null;</span>
+            }
+<span class="fc bfc" id="L340" title="All 4 branches covered.">            if (upper1 == 0 &amp;&amp; lower1 == 0) {</span>
+<span class="fc" id="L341">                range = null;</span>
+            }
+<span class="fc" id="L343">            Range r = Range.combine(testRange, range);</span>
+            //assertTrue(Math.min(low, lower1) == r.getLowerBound() &amp;&amp; Math.max(up, upper1) == r.getUpperBound());
+<span class="fc bfc" id="L345" title="All 4 branches covered.">            if (range != null &amp;&amp; testRange != null) {</span>
+<span class="fc" id="L346">                assertEquals(Math.min(low, lower1), r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L347">                assertEquals(Math.max(up, upper1), r.getUpperBound(), 0.0000001d);</span>
+            }
+<span class="fc bfc" id="L349" title="All 4 branches covered.">            if (range != null &amp;&amp; testRange == null) {</span>
+<span class="fc" id="L350">                assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L351">                assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+            }
+<span class="fc bfc" id="L353" title="All 4 branches covered.">            if (range == null &amp;&amp; testRange != null) {</span>
+<span class="fc" id="L354">                assertEquals(low, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L355">                assertEquals(up, r.getUpperBound(), 0.0000001d);</span>
+            }
+<span class="fc" id="L357">            boolean t = false;</span>
+<span class="fc bfc" id="L358" title="All 2 branches covered.">            if (r == null) {</span>
+<span class="fc" id="L359">                t = true;</span>
+            }
+<span class="fc bfc" id="L361" title="All 4 branches covered.">            if (range == null &amp;&amp; testRange == null) {</span>
+<span class="fc" id="L362">                assertTrue(t); </span>
+            }
+<span class="fc" id="L364">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L365">            assertTrue(true);</span>
+        }
+<span class="fc" id="L367">    }</span>
+    
+    @Test
+    public void testExpandToInclude() {
+<span class="fc bfc" id="L371" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.expandToInclude);</span>
+        try {
+<span class="fc" id="L373">            testRange = new Range(low, up);</span>
+<span class="fc bfc" id="L374" title="All 4 branches covered.">            if (low == 0 &amp;&amp; up == 0) {</span>
+<span class="fc" id="L375">                testRange = null;</span>
+            }
+<span class="fc" id="L377">            Range r = Range.expandToInclude(testRange, arg);</span>
+<span class="fc" id="L378">            assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L379">            assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L380">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L381">            assertTrue(true);</span>
+        }
+<span class="fc" id="L383">    }</span>
+    
+    @Test
+    public void testExpand() {
+<span class="fc bfc" id="L387" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.expand);</span>
+        try {
+<span class="fc" id="L389">            testRange = new Range(low, up);</span>
+<span class="fc" id="L390">            Range r = testRange;;</span>
+<span class="fc bfc" id="L391" title="All 4 branches covered.">            if (up == 0 &amp;&amp; low == 0) {</span>
+<span class="fc" id="L392">                r = null;</span>
+            }
+<span class="fc" id="L394">            r = Range.expand(r, arg, anticipated);</span>
+<span class="fc" id="L395">            assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L396">            assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L397">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L398">            assertTrue(true);</span>
+        }
+<span class="fc" id="L400">    }</span>
+    
+    @Test
+    public void testShift() {
+<span class="fc bfc" id="L404" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.shift);</span>
+        try {
+<span class="fc" id="L406">            testRange = new Range(low, up);</span>
+<span class="fc" id="L407">            Range r = Range.shift(testRange, arg);</span>
+<span class="fc" id="L408">            assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L409">            assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L410">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L411">            assertTrue(true);</span>
+        }
+<span class="fc" id="L413">    }</span>
+    
+    @Test
+    public void testShift2() {
+<span class="fc bfc" id="L417" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.shift2);</span>
+        try {
+<span class="fc" id="L419">            testRange = new Range(low, up);</span>
+            boolean zero;
+            Range r;
+<span class="fc bfc" id="L422" title="All 2 branches covered.">            if (anticipated == 1) {</span>
+<span class="fc" id="L423">                zero = true;</span>
+<span class="fc" id="L424">            } else {</span>
+<span class="fc" id="L425">                zero = false;</span>
+            }
+<span class="fc bfc" id="L427" title="All 4 branches covered.">            if (up == 0 &amp;&amp; low == 0) {</span>
+<span class="fc" id="L428">                r = null;</span>
+<span class="fc" id="L429">            } else {</span>
+<span class="fc" id="L430">                r = testRange;</span>
+            }
+<span class="fc" id="L432">            r = Range.shift(r, arg, zero);</span>
+<span class="fc" id="L433">            assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L434">            assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L435">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L436">            assertTrue(true);</span>
+        }
+<span class="fc" id="L438">    }</span>
+    
+    @Test
+    public void testScale() {
+<span class="fc bfc" id="L442" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.scale);</span>
+        try {
+<span class="fc" id="L444">            testRange = new Range(low, up);</span>
+<span class="fc bfc" id="L445" title="All 4 branches covered.">            if (up == 0 &amp;&amp; low == 0) {</span>
+<span class="fc" id="L446">                testRange = null;</span>
+            }
+<span class="fc" id="L448">            Range r = Range.scale(testRange, arg);</span>
+<span class="fc" id="L449">            assertEquals(lower1, r.getLowerBound(), 0.0000001d);</span>
+<span class="fc" id="L450">            assertEquals(upper1, r.getUpperBound(), 0.0000001d);</span>
+<span class="fc" id="L451">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L452">            assertTrue(true);</span>
+        }
+<span class="fc" id="L454">    }</span>
+    
+    @Test
+    public void testEquals() {
+<span class="fc bfc" id="L458" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.equals);</span>
+        try {
+<span class="fc" id="L460">            testRange = new Range(low, up);</span>
+<span class="fc" id="L461">            range = new Range(lower1, upper1);</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">            if (arg == 1) {</span>
+<span class="fc bfc" id="L463" title="All 2 branches covered.">                if (anticipated == 1) {</span>
+<span class="fc" id="L464">                    assertTrue(testRange.equals(range));</span>
+<span class="fc" id="L465">                } else {</span>
+<span class="fc" id="L466">                    assertFalse(testRange.equals(range));</span>
+                }
+<span class="fc" id="L468">            } else {</span>
+<span class="fc" id="L469">                assertFalse(testRange.equals(new Object()));</span>
+            }
+<span class="fc" id="L471">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L472">            assertTrue(true);</span>
+        }
+<span class="fc" id="L474">    }</span>
+    
+    @Test
+    public void testHashCode() {
+<span class="fc bfc" id="L478" title="All 2 branches covered.">        Assume.assumeTrue(type == Type.hashcode);</span>
+        try {
+<span class="fc" id="L480">            testRange = new Range(low, up);</span>
+<span class="fc" id="L481">            assertEquals(anticipated, testRange.hashCode(), 0.0000001d);</span>
+<span class="fc" id="L482">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L483">            assertTrue(true);</span>
+        }
+<span class="fc" id="L485">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>RangeTest (14) (2020年4月28日 下午8:44:56)</div></body></html>

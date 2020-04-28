@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Range.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">RangeTest (14) (2020年4月28日 下午8:44:56)</a> &gt; <a href="../../index.html" class="el_group">JFreeChart3</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.fhlxc.rangetest</a> &gt; <span class="el_source">Range.java</span></div><h1>Range.java</h1><pre class="source lang-java linenums">/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * ----------
+ * Range.java
+ * ----------
+ * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Chuanhao Chiu;
+ *                   Bill Kelemen;
+ *                   Nicolas Brodu;
+ *                   Sergei Ivanov;
+ *
+ * Changes (from 23-Jun-2001)
+ * --------------------------
+ * 22-Apr-2002 : Version 1, loosely based by code by Bill Kelemen (DG);
+ * 30-Apr-2002 : Added getLength() and getCentralValue() methods.  Changed
+ *               argument check in constructor (DG);
+ * 13-Jun-2002 : Added contains(double) method (DG);
+ * 22-Aug-2002 : Added fix to combine method where both ranges are null, thanks
+ *               to Chuanhao Chiu for reporting and fixing this (DG);
+ * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
+ * 26-Mar-2003 : Implemented Serializable (DG);
+ * 14-Aug-2003 : Added equals() method (DG);
+ * 27-Aug-2003 : Added toString() method (BK);
+ * 11-Sep-2003 : Added Clone Support (NB);
+ * 23-Sep-2003 : Fixed Checkstyle issues (DG);
+ * 25-Sep-2003 : Oops, Range immutable, clone not necessary (NB);
+ * 05-May-2004 : Added constrain() and intersects() methods (DG);
+ * 18-May-2004 : Added expand() method (DG);
+ * ------------- JFreeChart 1.0.x ---------------------------------------------
+ * 11-Jan-2006 : Added new method expandToInclude(Range, double) (DG);
+ * 18-Dec-2007 : New methods intersects(Range) and scale(...) thanks to Sergei
+ *               Ivanov (DG);
+ *
+ */
+
+package com.fhlxc.rangetest;
+
+import java.io.Serializable;
+
+/**
+ * Represents an immutable range of values.
+ */
+public strictfp class Range implements Serializable {
+
+    /** For serialization. */
+    private static final long serialVersionUID = -906333695431863380L;
+
+    /** The lower bound of the range. */
+    private double lower;
+
+    /** The upper bound of the range. */
+    private double upper;
+
+    /**
+     * Creates a new range.
+     *
+     * @param lower  the lower bound (must be &lt;= upper bound).
+     * @param upper  the upper bound (must be &gt;= lower bound).
+     */
+<span class="fc" id="L86">    public Range(double lower, double upper) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (lower &gt; upper) {</span>
+<span class="fc" id="L88">            String msg = &quot;Range(double, double): require lower (&quot; + lower</span>
+<span class="fc" id="L89">                + &quot;) &lt;= upper (&quot; + upper + &quot;).&quot;;</span>
+<span class="fc" id="L90">            throw new IllegalArgumentException(msg);</span>
+        }
+<span class="fc" id="L92">        this.lower = lower;</span>
+<span class="fc" id="L93">        this.upper = upper;</span>
+<span class="fc" id="L94">    }</span>
+
+    /**
+     * Returns the lower bound for the range.
+     *
+     * @return The lower bound.
+     */
+    public double getLowerBound() {
+<span class="fc" id="L102">        return this.lower;</span>
+    }
+
+    /**
+     * Returns the upper bound for the range.
+     *
+     * @return The upper bound.
+     */
+    public double getUpperBound() {
+<span class="fc" id="L111">        return this.upper;</span>
+    }
+
+    /**
+     * Returns the length of the range.
+     *
+     * @return The length.
+     */
+    public double getLength() {
+<span class="fc" id="L120">        return this.upper - this.lower;</span>
+    }
+
+    /**
+     * Returns the central value for the range.
+     *
+     * @return The central value.
+     */
+    public double getCentralValue() {
+<span class="fc" id="L129">        return this.lower / 2.0 + this.upper / 2.0;</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the range contains the specified value and
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     *
+     * @param value  the value to lookup.
+     *
+     * @return &lt;code&gt;true&lt;/code&gt; if the range contains the specified value.
+     */
+    public boolean contains(double value) {
+<span class="fc bfc" id="L141" title="All 4 branches covered.">        return (value &gt;= this.lower &amp;&amp; value &lt;= this.upper);</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the range intersects with the specified
+     * range, and &lt;code&gt;false&lt;/code&gt; otherwise.
+     *
+     * @param b0  the lower bound (should be &lt;= b1).
+     * @param b1  the upper bound (should be &gt;= b0).
+     *
+     * @return A boolean.
+     */
+    public boolean intersects(double b0, double b1) {
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        if (b0 &lt;= this.lower) {</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">            return (b1 &gt;= this.lower);</span>
+        }
+        else {
+<span class="fc bfc" id="L158" title="All 4 branches covered.">            return (b0 &lt;= this.upper &amp;&amp; b1 &gt;= b0);</span>
+        }
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the range intersects with the specified
+     * range, and &lt;code&gt;false&lt;/code&gt; otherwise.
+     *
+     * @param range  another range (&lt;code&gt;null&lt;/code&gt; not permitted).
+     *
+     * @return A boolean.
+     *
+     * @since 1.0.9
+     */
+    public boolean intersects(Range range) {
+<span class="fc" id="L173">        return intersects(range.getLowerBound(), range.getUpperBound());</span>
+    }
+
+    /**
+     * Returns the value within the range that is closest to the specified
+     * value.
+     *
+     * @param value  the value
+     *
+     * @return The constrained value.
+     */
+    public double constrain(double value) {
+<span class="fc" id="L185">        double result = value;</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (!contains(value)) {</span>
+            //变为&gt;=,不改变语义
+<span class="fc bfc" id="L188" title="All 2 branches covered.">            if (value &gt; this.upper) {</span>
+<span class="fc" id="L189">                result = this.upper;</span>
+<span class="fc" id="L190">            }</span>
+            //变为&lt;=,不改变语义
+            //TODO 分支无法覆盖，因为大于等于lower，小于等于upper的数在范围内，就无法进入这个分支
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">            else if (value &lt; this.lower) { </span>
+<span class="fc" id="L194">                result = this.lower;</span>
+            }
+        }
+<span class="fc" id="L197">        return result;</span>
+    }
+
+    /**
+     * Creates a new range by combining two existing ranges.
+     * &lt;P&gt;
+     * Note that:
+     * &lt;ul&gt;
+     *   &lt;li&gt;either range can be &lt;code&gt;null&lt;/code&gt;, in which case the other
+     *       range is returned;&lt;/li&gt;
+     *   &lt;li&gt;if both ranges are &lt;code&gt;null&lt;/code&gt; the return value is
+     *       &lt;code&gt;null&lt;/code&gt;.&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param range1  the first range (&lt;code&gt;null&lt;/code&gt; permitted).
+     * @param range2  the second range (&lt;code&gt;null&lt;/code&gt; permitted).
+     *
+     * @return A new range (possibly &lt;code&gt;null&lt;/code&gt;).
+     */
+    public static Range combine(Range range1, Range range2) {
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        if (range1 == null) {</span>
+<span class="fc" id="L218">            return range2;</span>
+        }
+        else {
+<span class="fc bfc" id="L221" title="All 2 branches covered.">            if (range2 == null) {</span>
+<span class="fc" id="L222">                return range1;</span>
+            }
+            else {
+<span class="fc" id="L225">                double l = Math.min(range1.getLowerBound(),</span>
+<span class="fc" id="L226">                        range2.getLowerBound());</span>
+<span class="fc" id="L227">                double u = Math.max(range1.getUpperBound(),</span>
+<span class="fc" id="L228">                        range2.getUpperBound());</span>
+<span class="fc" id="L229">                return new Range(l, u);</span>
+            }
+        }
+    }
+
+    /**
+     * Returns a range that includes all the values in the specified
+     * &lt;code&gt;range&lt;/code&gt; AND the specified &lt;code&gt;value&lt;/code&gt;.
+     *
+     * @param range  the range (&lt;code&gt;null&lt;/code&gt; permitted).
+     * @param value  the value that must be included.
+     *
+     * @return A range.
+     *
+     * @since 1.0.1
+     */
+    public static Range expandToInclude(Range range, double value) {
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        if (range == null) {</span>
+<span class="fc" id="L247">            return new Range(value, value);</span>
+        }
+<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (value &lt; range.getLowerBound()) {</span>
+<span class="fc" id="L250">            return new Range(value, range.getUpperBound());</span>
+        }
+<span class="fc bfc" id="L252" title="All 2 branches covered.">        else if (value &gt; range.getUpperBound()) {</span>
+<span class="fc" id="L253">            return new Range(range.getLowerBound(), value);</span>
+        }
+        else {
+<span class="fc" id="L256">            return range;</span>
+        }
+    }
+
+    /**
+     * Creates a new range by adding margins to an existing range.
+     *
+     * @param range  the range (&lt;code&gt;null&lt;/code&gt; not permitted).
+     * @param lowerMargin  the lower margin (expressed as a percentage of the
+     *                     range length).
+     * @param upperMargin  the upper margin (expressed as a percentage of the
+     *                     range length).
+     *
+     * @return The expanded range.
+     */
+    public static Range expand(Range range,
+                               double lowerMargin, double upperMargin) {
+<span class="fc bfc" id="L273" title="All 2 branches covered.">        if (range == null) {</span>
+<span class="fc" id="L274">            throw new IllegalArgumentException(&quot;Null 'range' argument.&quot;);</span>
+        }
+<span class="fc" id="L276">        double length = range.getLength();</span>
+<span class="fc" id="L277">        double lower = range.getLowerBound() - length * lowerMargin;</span>
+<span class="fc" id="L278">        double upper = range.getUpperBound() + length * upperMargin;</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">        if (lower &gt; upper) {</span>
+<span class="fc" id="L280">            lower = lower / 2.0 + upper / 2.0;</span>
+<span class="fc" id="L281">            upper = lower;</span>
+        }
+<span class="fc" id="L283">        return new Range(lower, upper);</span>
+    }
+
+    /**
+     * Shifts the range by the specified amount.
+     *
+     * @param base  the base range (&lt;code&gt;null&lt;/code&gt; not permitted).
+     * @param delta  the shift amount.
+     *
+     * @return A new range.
+     */
+    public static Range shift(Range base, double delta) {
+<span class="fc" id="L295">        return shift(base, delta, false);</span>
+    }
+
+    /**
+     * Shifts the range by the specified amount.
+     *
+     * @param base  the base range (&lt;code&gt;null&lt;/code&gt; not permitted).
+     * @param delta  the shift amount.
+     * @param allowZeroCrossing  a flag that determines whether or not the
+     *                           bounds of the range are allowed to cross
+     *                           zero after adjustment.
+     *
+     * @return A new range.
+     */
+    public static Range shift(Range base, double delta,
+                              boolean allowZeroCrossing) {
+<span class="fc bfc" id="L311" title="All 2 branches covered.">        if (base == null) {</span>
+<span class="fc" id="L312">            throw new IllegalArgumentException(&quot;Null 'base' argument.&quot;);</span>
+        }
+<span class="fc bfc" id="L314" title="All 2 branches covered.">        if (allowZeroCrossing) {</span>
+<span class="fc" id="L315">            return new Range(base.getLowerBound() + delta,</span>
+<span class="fc" id="L316">                    base.getUpperBound() + delta);</span>
+        }
+        else {
+<span class="fc" id="L319">            return new Range(shiftWithNoZeroCrossing(base.getLowerBound(),</span>
+<span class="fc" id="L320">                    delta), shiftWithNoZeroCrossing(base.getUpperBound(),</span>
+<span class="fc" id="L321">                    delta));</span>
+        }
+    }
+
+    /**
+     * Returns the given &lt;code&gt;value&lt;/code&gt; adjusted by &lt;code&gt;delta&lt;/code&gt; but
+     * with a check to prevent the result from crossing &lt;code&gt;0.0&lt;/code&gt;.
+     *
+     * @param value  the value.
+     * @param delta  the adjustment.
+     *
+     * @return The adjusted value.
+     */
+    private static double shiftWithNoZeroCrossing(double value, double delta) {
+<span class="fc bfc" id="L335" title="All 2 branches covered.">        if (value &gt; 0.0) {</span>
+<span class="fc" id="L336">            return Math.max(value + delta, 0.0);</span>
+        }
+<span class="fc bfc" id="L338" title="All 2 branches covered.">        else if (value &lt; 0.0) {</span>
+<span class="fc" id="L339">            return Math.min(value + delta, 0.0);</span>
+        }
+        else {
+<span class="fc" id="L342">            return value + delta;</span>
+        }
+    }
+
+    /**
+     * Scales the range by the specified factor.
+     *
+     * @param base the base range (&lt;code&gt;null&lt;/code&gt; not permitted).
+     * @param factor the scaling factor (must be non-negative).
+     *
+     * @return A new range.
+     *
+     * @since 1.0.9
+     */
+    public static Range scale(Range base, double factor) {
+<span class="fc bfc" id="L357" title="All 2 branches covered.">        if (base == null) {</span>
+<span class="fc" id="L358">            throw new IllegalArgumentException(&quot;Null 'base' argument.&quot;);</span>
+        }
+<span class="fc bfc" id="L360" title="All 2 branches covered.">        if (factor &lt; 0) {</span>
+<span class="fc" id="L361">            throw new IllegalArgumentException(&quot;Negative 'factor' argument.&quot;);</span>
+        }
+<span class="fc" id="L363">        return new Range(base.getLowerBound() * factor,</span>
+<span class="fc" id="L364">                base.getUpperBound() * factor);</span>
+    }
+
+    /**
+     * Tests this object for equality with an arbitrary object.
+     *
+     * @param obj  the object to test against (&lt;code&gt;null&lt;/code&gt; permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L375" title="All 2 branches covered.">        if (!(obj instanceof Range)) {</span>
+<span class="fc" id="L376">            return false;</span>
+        }
+<span class="fc" id="L378">        Range range = (Range) obj;</span>
+<span class="fc bfc" id="L379" title="All 2 branches covered.">        if (!(this.lower == range.lower)) {</span>
+<span class="fc" id="L380">            return false;</span>
+        }
+<span class="fc bfc" id="L382" title="All 2 branches covered.">        if (!(this.upper == range.upper)) {</span>
+<span class="fc" id="L383">            return false;</span>
+        }
+<span class="fc" id="L385">        return true;</span>
+    }
+
+    /**
+     * Returns a hash code.
+     *
+     * @return A hash code.
+     */
+    public int hashCode() {
+        int result;
+        long temp;
+<span class="fc" id="L396">        temp = Double.doubleToLongBits(this.lower);</span>
+<span class="fc" id="L397">        result = (int) (temp ^ (temp &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L398">        temp = Double.doubleToLongBits(this.upper);</span>
+<span class="fc" id="L399">        result = 29 * result + (int) (temp ^ (temp &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L400">        return result;</span>
+    }
+
+    /**
+     * Returns a string representation of this Range.
+     *
+     * @return A String &quot;Range[lower,upper]&quot; where lower=lower range and
+     *         upper=upper range.
+     */
+    public String toString() {
+<span class="fc" id="L410">        return (&quot;Range[&quot; + this.lower + &quot;,&quot; + this.upper + &quot;]&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>RangeTest (14) (2020年4月28日 下午8:44:56)</div></body></html>

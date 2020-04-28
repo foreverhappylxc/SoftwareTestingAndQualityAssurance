@@ -177,17 +177,20 @@ public strictfp class Range implements Serializable {
      * Returns the value within the range that is closest to the specified
      * value.
      *
-     * @param value  the value.
+     * @param value  the value
      *
      * @return The constrained value.
      */
     public double constrain(double value) {
         double result = value;
         if (!contains(value)) {
+            //变为>=,不改变语义
             if (value > this.upper) {
                 result = this.upper;
             }
-            else if (value < this.lower) {
+            //变为<=,不改变语义
+            //TODO 分支无法覆盖，因为大于等于lower，小于等于upper的数在范围内，就无法进入这个分支
+            else if (value < this.lower) { 
                 result = this.lower;
             }
         }
