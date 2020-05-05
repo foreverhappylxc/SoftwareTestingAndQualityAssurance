@@ -1,0 +1,773 @@
+{
+  "id": "08f5004e-0c2e-470a-8125-59f4d9a55494",
+  "version": "2.0",
+  "name": "WebCaculate",
+  "url": "https://zh.numberempire.com/",
+  "tests": [{
+    "id": "7919bf8e-8c66-48e2-8765-a6929bd97690",
+    "name": "ExpressionEvaluation",
+    "commands": [{
+      "id": "c2ef0f39-8ff7-48d2-9911-32b250108bf2",
+      "comment": "",
+      "command": "open",
+      "target": "https://zh.numberempire.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ce510ae9-5b26-4f8a-a64c-7e129592ab2c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "909x1033",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "77636a90-6ac7-47cd-a45c-dcb98878310f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=表达式计算器",
+      "targets": [
+        ["linkText=表达式计算器", "linkText"],
+        ["css=.left:nth-child(1) > .menu:nth-child(9)", "css:finder"],
+        ["xpath=//a[contains(text(),'表达式计算器')]", "xpath:link"],
+        ["xpath=//td[@id='menu']/table/tbody/tr/td/a[9]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/expressioncalculator.php')]", "xpath:href"],
+        ["xpath=//a[9]", "xpath:position"],
+        ["xpath=//a[contains(.,'表达式计算器')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8cb5846f-b83c-4214-846d-b3c4cc052d0e",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "表达式计算器",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "74c18173-7639-4836-9b1a-19bb45f63b1e",
+      "comment": "",
+      "command": "click",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aea09d3e-9c66-4505-b550-0bc10bcab1a8",
+      "comment": "",
+      "command": "type",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "5*3+5"
+    }, {
+      "id": "d131795e-f539-4f0f-a6c0-475e9e7911fa",
+      "comment": "",
+      "command": "click",
+      "target": "name=result_type",
+      "targets": [
+        ["name=result_type", "name"],
+        ["css=select", "css:finder"],
+        ["xpath=//select[@name='result_type']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[2]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"],
+        ["xpath=//select[contains(.,'实数\n表达式')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "36479b53-2932-48f8-8018-3036368a5337",
+      "comment": "",
+      "command": "click",
+      "target": "name=result_type",
+      "targets": [
+        ["name=result_type", "name"],
+        ["css=select", "css:finder"],
+        ["xpath=//select[@name='result_type']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[2]/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"],
+        ["xpath=//select[contains(.,'实数\n表达式')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9064416b-f793-4aca-ac93-3e87b9a2abd0",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) input:nth-child(3)",
+      "targets": [
+        ["css=tr:nth-child(5) input:nth-child(3)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef51a2d7-ff29-406c-8c2f-0669e409d4fb",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.result",
+      "targets": [
+        ["css=.result", "css:finder"],
+        ["xpath=//table[@id='main']/tbody/tr[6]/td", "xpath:idRelative"],
+        ["xpath=//tr[6]/td", "xpath:position"]
+      ],
+      "value": "表达式 5*3+5 = 20"
+    }, {
+      "id": "f0edd881-e392-4b4a-a1da-c09ab8df2db8",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=MathJax-Span-5",
+      "targets": [
+        ["id=MathJax-Span-5", "id"],
+        ["css=#MathJax-Span-5", "css:finder"],
+        ["xpath=//span[@id='MathJax-Span-5']", "xpath:attributes"],
+        ["xpath=//span[@id='MathJax-Span-4']/span", "xpath:idRelative"],
+        ["xpath=//span/span/span/span/span/span/span", "xpath:position"]
+      ],
+      "value": "20"
+    }]
+  }, {
+    "id": "dcb64ecf-2046-4ec8-ba3f-58ce4b35196f",
+    "name": "FactorialCalculation",
+    "commands": [{
+      "id": "bda59078-a020-4cd5-b15d-da635666300a",
+      "comment": "",
+      "command": "open",
+      "target": "https://zh.numberempire.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7e69e472-3405-4ea4-b44c-800c8b9c7d40",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "909x1033",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3fbdedc3-e0b6-4f86-98a6-ebf18e3e316d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=阶乘计算器",
+      "targets": [
+        ["linkText=阶乘计算器", "linkText"],
+        ["css=.left:nth-child(3) > .menu:nth-child(9)", "css:finder"],
+        ["xpath=//a[contains(text(),'阶乘计算器')]", "xpath:link"],
+        ["xpath=//td[@id='menu']/table/tbody/tr/td[3]/a[9]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/factorialcalculator.php')]", "xpath:href"],
+        ["xpath=//td[3]/a[9]", "xpath:position"],
+        ["xpath=//a[contains(.,'阶乘计算器')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "162fe3e4-e821-4ed9-be35-9a158883390b",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "阶乘计算器",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ea505879-61b2-4eef-822e-087519a8cd7b",
+      "comment": "",
+      "command": "click",
+      "target": "name=number",
+      "targets": [
+        ["name=number", "name"],
+        ["css=.full_width_20", "css:finder"],
+        ["xpath=//input[@name='number']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "433fd435-5c82-48b7-a456-0b6b36034d11",
+      "comment": "",
+      "command": "type",
+      "target": "name=number",
+      "targets": [
+        ["name=number", "name"],
+        ["css=.full_width_20", "css:finder"],
+        ["xpath=//input[@name='number']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "0"
+    }, {
+      "id": "30a46fe5-61f9-4636-b107-32420831df05",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) form > input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(5) form > input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ac9768d3-3bf2-4cea-a775-efee2e71266a",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=tr:nth-child(7) div:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(7) div:nth-child(1)", "css:finder"],
+        ["xpath=//table[@id='main']/tbody/tr[7]/td/div", "xpath:idRelative"],
+        ["xpath=//tr[7]/td/div", "xpath:position"],
+        ["xpath=//div[contains(.,'2的阶乘为：')]", "xpath:innerText"]
+      ],
+      "value": "0的阶乘为："
+    }, {
+      "id": "797e31dc-32ef-46d7-93ac-60dafdfb72c7",
+      "comment": "",
+      "command": "verifyText",
+      "target": "linkText=1",
+      "targets": [
+        ["linkText=2", "linkText"],
+        ["css=.nowrap > a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'2')]", "xpath:link"],
+        ["xpath=//table[@id='main']/tbody/tr[7]/td/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/2')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'2')]", "xpath:innerText"]
+      ],
+      "value": "1"
+    }, {
+      "id": "f75d2281-e25b-4fc4-8115-6672a2e77da0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=1",
+      "targets": [
+        ["linkText=2", "linkText"],
+        ["css=.nowrap > a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'2')]", "xpath:link"],
+        ["xpath=//table[@id='main']/tbody/tr[7]/td/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/2')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e82605b2-b18f-459c-ba2e-3766eb63717b",
+      "comment": "",
+      "command": "verifyTitle",
+      "target": "该数性质 1",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "4b5e62b4-9d39-40e9-86f9-c397c9979796",
+    "name": "FunctionDerivation",
+    "commands": [{
+      "id": "500dde52-0dd1-4be2-808f-47008e791c78",
+      "comment": "",
+      "command": "open",
+      "target": "https://zh.numberempire.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c60ac97-3857-4ff2-ba85-347230561c2f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "909x1033",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2b7c1515-715d-45a9-9ef3-dea49ccbb76d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=函数求导工具",
+      "targets": [
+        ["linkText=函数求导工具", "linkText"],
+        ["css=.left:nth-child(1) > .menu:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'函数求导工具')]", "xpath:link"],
+        ["xpath=//td[@id='menu']/table/tbody/tr/td/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/derivativecalculator.php')]", "xpath:href"],
+        ["xpath=//td/table/tbody/tr/td/table/tbody/tr/td/a", "xpath:position"],
+        ["xpath=//a[contains(.,'函数求导工具')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6bddef77-55da-40e9-9321-cf925813a9d6",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "分步求导工具",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4421f3d2-c335-4910-b265-ee1f345c0cf4",
+      "comment": "",
+      "command": "click",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "35f98794-3753-46d1-8c8c-34a5e04ab3fe",
+      "comment": "",
+      "command": "type",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "x^3"
+    }, {
+      "id": "6140e8e3-b1bb-4906-aafe-5654ccc154ee",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) input:nth-child(4)",
+      "targets": [
+        ["css=tr:nth-child(5) input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2af2ba03-83e9-4f1a-82d6-0bbbe1824d7f",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.nowrap",
+      "targets": [
+        ["css=.nowrap", "css:finder"],
+        ["xpath=//table[@id='main']/tbody/tr[6]/td/div", "xpath:idRelative"],
+        ["xpath=//tr[6]/td/div", "xpath:position"]
+      ],
+      "value": "函数 x^3 自变量为 x = 3*x^2 "
+    }, {
+      "id": "d817433b-50c4-48b2-9771-da1522b611cf",
+      "comment": "",
+      "command": "click",
+      "target": "id=point",
+      "targets": [
+        ["id=point", "id"],
+        ["name=point", "name"],
+        ["css=#point", "css:finder"],
+        ["xpath=//input[@id='point']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[10]/td/form/input", "xpath:idRelative"],
+        ["xpath=//tr[10]/td/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "566f5870-1495-4246-b4e0-b03c44997dbf",
+      "comment": "",
+      "command": "type",
+      "target": "id=point",
+      "targets": [
+        ["id=point", "id"],
+        ["name=point", "name"],
+        ["css=#point", "css:finder"],
+        ["xpath=//input[@id='point']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[10]/td/form/input", "xpath:idRelative"],
+        ["xpath=//tr[10]/td/form/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "8037e8fd-b5ee-4889-b50c-349c664acb1b",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(10) input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(10) input:nth-child(2)", "css:finder"],
+        ["xpath=(//input[@value='计算'])[2]", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[10]/td/form/input[2]", "xpath:idRelative"],
+        ["xpath=//tr[10]/td/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c4882cf2-6dac-4989-bf87-b8495c38f3ac",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.result",
+      "targets": [
+        ["css=.result", "css:finder"],
+        ["xpath=//table[@id='main']/tbody/tr[6]/td", "xpath:idRelative"],
+        ["xpath=//tr[6]/td", "xpath:position"]
+      ],
+      "value": "表达式 3*x^2[x=2] = 12"
+    }, {
+      "id": "f505ec0c-9969-48ce-90c9-55543b0aa81d",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=MathJax-Span-5",
+      "targets": [
+        ["id=MathJax-Span-5", "id"],
+        ["css=#MathJax-Span-5", "css:finder"],
+        ["xpath=//span[@id='MathJax-Span-5']", "xpath:attributes"],
+        ["xpath=//span[@id='MathJax-Span-4']/span", "xpath:idRelative"],
+        ["xpath=//span/span/span/span/span/span/span", "xpath:position"]
+      ],
+      "value": "12"
+    }]
+  }, {
+    "id": "951d9c9f-7bf7-4587-a6f6-d3c3e3635040",
+    "name": "DefiniteIntegral",
+    "commands": [{
+      "id": "79a81fac-b42f-45f6-9de0-50f13f6a0dc7",
+      "comment": "",
+      "command": "open",
+      "target": "https://zh.numberempire.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "38260d62-16b0-4c21-acf6-8e52b4f52061",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "909x1033",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29c73528-1a5b-4b0d-b961-7434460b250c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=定积分计算器",
+      "targets": [
+        ["linkText=定积分计算器", "linkText"],
+        ["css=.left:nth-child(1) > .menu:nth-child(3)", "css:finder"],
+        ["xpath=(//a[contains(text(),'定积分计算器')])[2]", "xpath:link"],
+        ["xpath=//td[@id='menu']/table/tbody/tr/td/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/definiteintegralcalculator.php')]", "xpath:href"],
+        ["xpath=//td/table/tbody/tr/td/table/tbody/tr/td/a[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a6c27f7-4f51-44aa-ae63-066d322090db",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "定积分计算器",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c292332-c97a-4c81-845b-46a06d030c28",
+      "comment": "",
+      "command": "click",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c29f159-8d6e-4bd3-8e4b-6fe508bd0a68",
+      "comment": "",
+      "command": "type",
+      "target": "name=function",
+      "targets": [
+        ["name=function", "name"],
+        ["css=.full_width:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='function']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "x^2"
+    }, {
+      "id": "207abf9b-b9dc-48a0-a8d5-ce636e57a2a2",
+      "comment": "",
+      "command": "click",
+      "target": "name=a",
+      "targets": [
+        ["name=a", "name"],
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='a']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3277d988-c92b-4008-96b0-1162f693cbb6",
+      "comment": "",
+      "command": "click",
+      "target": "name=a",
+      "targets": [
+        ["name=a", "name"],
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='a']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0bdc5d8-59c8-47c5-9b91-6986c79c3102",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "name=a",
+      "targets": [
+        ["name=a", "name"],
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='a']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "42155949-9b92-4342-abc1-743ca10db29e",
+      "comment": "",
+      "command": "type",
+      "target": "name=a",
+      "targets": [
+        ["name=a", "name"],
+        ["css=label:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='a']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[3]/input", "xpath:idRelative"],
+        ["xpath=//label[3]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "2877b000-c227-4368-a231-9b0666a5e961",
+      "comment": "",
+      "command": "click",
+      "target": "name=b",
+      "targets": [
+        ["name=b", "name"],
+        ["css=label:nth-child(4) > input", "css:finder"],
+        ["xpath=//input[@name='b']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[4]/input", "xpath:idRelative"],
+        ["xpath=//label[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8b85435-a34b-49d0-b8dd-3c308c10061d",
+      "comment": "",
+      "command": "type",
+      "target": "name=b",
+      "targets": [
+        ["name=b", "name"],
+        ["css=label:nth-child(4) > input", "css:finder"],
+        ["xpath=//input[@name='b']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/label[4]/input", "xpath:idRelative"],
+        ["xpath=//label[4]/input", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "56710a5c-b21d-4293-9367-afeae190397f",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b5ba03e-f1e3-433b-88b7-d123456f07e6",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "67eca5b6-28ea-44a6-ad71-7fda848d2b91",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=input:nth-child(6)",
+      "targets": [
+        ["css=input:nth-child(6)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//table[@id='main']/tbody/tr[5]/td/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e6e9fbd5-a64e-40c4-afb6-9a3f0f184262",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.result",
+      "targets": [
+        ["css=.result", "css:finder"],
+        ["xpath=//table[@id='main']/tbody/tr[6]/td", "xpath:idRelative"],
+        ["xpath=//tr[6]/td", "xpath:position"]
+      ],
+      "value": "对此函数求积分 x^2 自变量为 x 区间[2,3] = 6.333333333333334 "
+    }]
+  }, {
+    "id": "aa40a4fb-875c-454e-a6f6-c0d2a95a3017",
+    "name": "NumberOfCombinations",
+    "commands": [{
+      "id": "83b35531-9a15-49aa-9f6d-0d9560cb42f7",
+      "comment": "",
+      "command": "open",
+      "target": "https://zh.numberempire.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e7a69e23-3b95-4495-948c-427c2571e34e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "909x1033",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "48d3f2cb-0d51-471c-be06-56e762508eea",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=组合数计算器",
+      "targets": [
+        ["linkText=组合数计算器", "linkText"],
+        ["css=.left:nth-child(3) > .menu:nth-child(11)", "css:finder"],
+        ["xpath=//a[contains(text(),'组合数计算器')]", "xpath:link"],
+        ["xpath=//td[@id='menu']/table/tbody/tr/td[3]/a[11]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/combinatorialcalculator.php')]", "xpath:href"],
+        ["xpath=//td[3]/a[11]", "xpath:position"],
+        ["xpath=//a[contains(.,'组合数计算器')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b9b1226-f75c-4a9c-b90b-f0f225be2491",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "组合数计算器",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "67e80d0e-c198-4466-b6c2-4ab90a7557f7",
+      "comment": "",
+      "command": "click",
+      "target": "id=ordered",
+      "targets": [
+        ["id=ordered", "id"],
+        ["name=ordered", "name"],
+        ["css=#ordered", "css:finder"],
+        ["xpath=//select[@id='ordered']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr/td/label/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad4b7e03-830b-4b7a-ae0d-e63d8f2f04ec",
+      "comment": "",
+      "command": "select",
+      "target": "id=ordered",
+      "targets": [],
+      "value": "label=是"
+    }, {
+      "id": "1f6456df-3a7c-4857-88f4-7e5131e9e186",
+      "comment": "",
+      "command": "click",
+      "target": "id=ordered",
+      "targets": [
+        ["id=ordered", "id"],
+        ["name=ordered", "name"],
+        ["css=#ordered", "css:finder"],
+        ["xpath=//select[@id='ordered']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr/td/label/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40f854c2-4d0e-4b7a-a518-a5cd2f86b56c",
+      "comment": "",
+      "command": "click",
+      "target": "id=N",
+      "targets": [
+        ["id=N", "id"],
+        ["name=N", "name"],
+        ["css=#N", "css:finder"],
+        ["xpath=//input[@id='N']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr[3]/td/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e636a3a6-34e7-4631-b689-afae2bf2414d",
+      "comment": "",
+      "command": "type",
+      "target": "id=N",
+      "targets": [
+        ["id=N", "id"],
+        ["name=N", "name"],
+        ["css=#N", "css:finder"],
+        ["xpath=//input[@id='N']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr[3]/td/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "7"
+    }, {
+      "id": "149e099b-ff2a-4c1c-91ef-8b7877ad1e1d",
+      "comment": "",
+      "command": "click",
+      "target": "id=M",
+      "targets": [
+        ["id=M", "id"],
+        ["name=M", "name"],
+        ["css=#M", "css:finder"],
+        ["xpath=//input[@id='M']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr[4]/td/label/input", "xpath:idRelative"],
+        ["xpath=//tr[4]/td/label/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d76b4ede-fa8a-42e2-82e7-c304975af0ab",
+      "comment": "",
+      "command": "type",
+      "target": "id=M",
+      "targets": [
+        ["id=M", "id"],
+        ["name=M", "name"],
+        ["css=#M", "css:finder"],
+        ["xpath=//input[@id='M']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/table/tbody/tr[4]/td/label/input", "xpath:idRelative"],
+        ["xpath=//tr[4]/td/label/input", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "02a52846-ae8d-49df-9b5f-4e7548af3436",
+      "comment": "",
+      "command": "click",
+      "target": "css=#form1 > input:nth-child(2)",
+      "targets": [
+        ["css=#form1 > input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='计算']", "xpath:attributes"],
+        ["xpath=//form[@id='form1']/input", "xpath:idRelative"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "10d1e35a-d3db-4bbf-b724-da9ea1450101",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=result",
+      "targets": [
+        ["id=result", "id"],
+        ["css=#result", "css:finder"],
+        ["xpath=//div[@id='result']", "xpath:attributes"],
+        ["xpath=//tr[@id='solution']/td/div", "xpath:idRelative"],
+        ["xpath=//tr[6]/td/div", "xpath:position"]
+      ],
+      "value": "n! / (n - m)! = 210"
+    }]
+  }],
+  "suites": [{
+    "id": "a2456454-4486-4cf3-be14-fbd987067b42",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://zh.numberempire.com/"],
+  "plugins": []
+}
