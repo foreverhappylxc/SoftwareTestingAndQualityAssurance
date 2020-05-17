@@ -2,7 +2,6 @@ package problem.medium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,6 +41,7 @@ public class QueueReconstructionByHeight {
         if (people == null || people.length <= 1)
             return people;
         int[][] a = new int[people.length][];
+        @SuppressWarnings("unchecked")
         List<Integer>[] map = new List[1100];
         for (int i = 0; i < people.length; i++) {
             int index = people[i][0];

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-@SuppressWarnings("Duplicates") public class CutOffTreesForGolfEvent {
+public class CutOffTreesForGolfEvent {
 
     public int cutOffTree(List<List<Integer>> forest) {
         int count = 0;

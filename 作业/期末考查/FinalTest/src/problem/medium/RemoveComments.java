@@ -15,7 +15,6 @@ public class RemoveComments {
         if (source == null || source.length == 0)
             return list;
 
-        boolean blockCommentExists = false;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < source.length; i++) {
             builder.append(source[i]).append("\n");

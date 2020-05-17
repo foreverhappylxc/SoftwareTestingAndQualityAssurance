@@ -36,7 +36,7 @@ public class DailyTemperature {
         return res;
     }
 
-    static class Pair implements Comparable {
+    static class Pair implements Comparable<Object> {
         int index;
         int value;
 

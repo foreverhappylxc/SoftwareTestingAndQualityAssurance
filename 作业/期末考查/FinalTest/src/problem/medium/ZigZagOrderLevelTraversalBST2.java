@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 /**
  * Created by sherxon on 1/8/17.
  */
-@SuppressWarnings("Duplicates")
 public class ZigZagOrderLevelTraversalBST2 {
 
     public String zigzagLevelOrder2(TreeNode root) {

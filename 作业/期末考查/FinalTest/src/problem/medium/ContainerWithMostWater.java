@@ -1,7 +1,5 @@
 package problem.medium;
 
-import java.util.*;
-
 /**
  * 
  */

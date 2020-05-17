@@ -1,6 +1,5 @@
 package problem.medium;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,10 +59,8 @@ public class ReplaceWords {
 
         private class TrieNode{
             TrieNode[] data= new TrieNode[26];
-            char value;
             boolean isLeaf;
             TrieNode(char c){
-                value=c;
             }
         }
 }

@@ -56,12 +56,10 @@ public class ShortEncodingofWords {
 
     private class TrieNode {
         TrieNode[] children = new TrieNode[26];
-        char val;
         int count = 0;
         boolean isWord = false;
 
         TrieNode(char v) {
-            this.val = v;
         }
     }
 }

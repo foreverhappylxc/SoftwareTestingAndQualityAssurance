@@ -3,12 +3,10 @@ package problem.medium;
 import problems.utils.TreeNode;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by sherxon on 1/8/17.
  */
-@SuppressWarnings("Duplicates")
 public class ZigZagOrderLevelTraversalBST1 {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {

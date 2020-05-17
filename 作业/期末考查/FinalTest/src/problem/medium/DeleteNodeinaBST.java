@@ -31,7 +31,6 @@ public class DeleteNodeinaBST {
                     parent = successor;
                     successor = successor.left;
                 }
-                int temp = x.val;
                 x.val = successor.val;
                 remove(successor, parent, key);
             } else {                                        // when the node has only one child

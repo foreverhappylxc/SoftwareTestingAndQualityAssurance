@@ -12,7 +12,6 @@ public class FindAndReplaceString {
         if (s == null || s.length() == 0)
             return s;
         StringBuilder sb = new StringBuilder();
-        int k = 0;
         Pair[] p = new Pair[indexes.length];
         for (int i = 0; i < p.length; i++) {
             p[i] = new Pair(i, indexes[i]);
