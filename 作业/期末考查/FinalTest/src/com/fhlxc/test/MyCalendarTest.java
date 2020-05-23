@@ -65,13 +65,15 @@ public class MyCalendarTest {
             {Type.NonEmpty, 10, 12, 1}, // 测试一般值
             {Type.NonEmpty, 89, 88, 0}, // 测试start小于end的情况
             {Type.NonEmpty, 10, 12, 1}, // 测试上边界临界
-            {Type.NonEmpty, -10, 9, 1}, // 测试下边界临界
+            {Type.NonEmpty, 8, 9, 1}, // 测试下边界临界
             {Type.NonEmpty, -190, -183, 0}, // 测试下边界相交
             {Type.NonEmpty, 27, 30, 0}, // 测试上边界相交
-            {Type.NonEmpty, 25, 26, 0}, // 测试包含
+            {Type.NonEmpty, 25, 26, 0}, // 测试内包含
+            {Type.NonEmpty, -200, -90, 0}, // 测试外包含
             {Type.NonEmpty, 13, 13, 1}, // 测试特殊值
             {Type.NonEmpty, -200, -185, 1}, // 使分支覆盖率提升 
             {Type.NonEmpty, -200, -98, 0},
+            {Type.NonEmpty, -120, -90, 0},
             {Type.Error, 4, 8, 1}, //为了覆盖率百分百添加的这个用例
         });
     }
