@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>WordSubsets.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">WordSubsets.java</span></div><h1>WordSubsets.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L10">public class WordSubsets {</span>
+    public List&lt;String&gt; wordSubsets(String[] s, String[] b) {
+<span class="nc bnc" id="L12" title="All 4 branches missed.">        if (s.length == 0 || b.length == 0)</span>
+<span class="nc" id="L13">            return new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L14">        int[] a = new int[26];</span>
+<span class="nc" id="L15">        int[] inner = new int[26];</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        for (int i = 0; i &lt; b.length; i++) {</span>
+<span class="nc" id="L17">            Arrays.fill(inner, 0);</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            for (int j = 0; j &lt; b[i].length(); j++) {</span>
+<span class="nc" id="L19">                inner[b[i].charAt(j) - 'a']++;</span>
+            }
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            for (int j = 0; j &lt; inner.length; j++) {</span>
+<span class="nc" id="L22">                a[j] = Math.max(a[j], inner[j]);</span>
+            }
+        }
+<span class="nc" id="L25">        List&lt;String&gt; r = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        for (int i = 0; i &lt; s.length; i++) {</span>
+<span class="nc" id="L27">            Arrays.fill(inner, 0);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            for (int j = 0; j &lt; s[i].length(); j++) {</span>
+<span class="nc" id="L29">                inner[s[i].charAt(j) - 'a']++;</span>
+            }
+<span class="nc" id="L31">            boolean f = true;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            for (int j = 0; j &lt; inner.length; j++) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                if (inner[i] &lt; a[j]) {</span>
+<span class="nc" id="L34">                    f = false;</span>
+<span class="nc" id="L35">                    break;</span>
+                }
+            }
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (f) {</span>
+<span class="nc" id="L39">                r.add(s[i]);</span>
+            }
+        }
+<span class="nc" id="L42">        return r;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

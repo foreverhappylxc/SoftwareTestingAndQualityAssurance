@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SmallestSubtreewithalltheDeepestNodes.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">SmallestSubtreewithalltheDeepestNodes.java</span></div><h1>SmallestSubtreewithalltheDeepestNodes.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.TreeNode;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L13">public class SmallestSubtreewithalltheDeepestNodes {</span>
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (root == null)</span>
+<span class="nc" id="L16">            return root;</span>
+<span class="nc" id="L17">        Set&lt;TreeNode&gt; set = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L18">        findDeepNodes(set, root);</span>
+<span class="nc" id="L19">        return getParentOfDeepNodes(set, root);</span>
+    }
+
+    TreeNode getParentOfDeepNodes(Set&lt;TreeNode&gt; set, TreeNode x) {
+<span class="nc" id="L23">        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L24">        q.add(x);</span>
+<span class="nc" id="L25">        TreeNode r = x;</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L27">            TreeNode current = q.remove();</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if (!isParent(current, new HashSet&lt;&gt;(set))) {</span>
+<span class="nc" id="L29">                continue;</span>
+            }
+<span class="nc" id="L31">            r = current;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (current.left != null)</span>
+<span class="nc" id="L33">                q.add(current.left);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            else if (current.right != null)</span>
+<span class="nc" id="L35">                q.add(current.right);</span>
+        }
+<span class="nc" id="L37">        return r;</span>
+    }
+
+    boolean isParent(TreeNode x, Set&lt;TreeNode&gt; set) {
+<span class="nc" id="L41">        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L42">        q.add(x);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L44">            TreeNode current = q.remove();</span>
+<span class="nc" id="L45">            set.remove(current);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (current.left != null)</span>
+<span class="nc" id="L47">                q.add(current.left);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (current.right != null)</span>
+<span class="nc" id="L49">                q.add(current.right);</span>
+
+        }
+<span class="nc" id="L52">        return set.isEmpty();</span>
+    }
+
+    void findDeepNodes(Set&lt;TreeNode&gt; set, TreeNode x) {
+<span class="nc" id="L56">        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L57">        q.add(x);</span>
+<span class="nc" id="L58">        int count = 1;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L60">            TreeNode current = q.remove();</span>
+<span class="nc" id="L61">            count--;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (current.left != null)</span>
+<span class="nc" id="L63">                q.add(current.left);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (current.right != null)</span>
+<span class="nc" id="L65">                q.add(current.right);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (count == 0) {</span>
+<span class="nc" id="L67">                count += q.size();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                if (q.size() &gt; 0) {</span>
+<span class="nc" id="L69">                    set.clear();</span>
+<span class="nc" id="L70">                    set.addAll(q);</span>
+                }
+            }
+        }
+
+<span class="nc" id="L75">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TopKFrequentElements.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">TopKFrequentElements.java</span></div><h1>TopKFrequentElements.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * Created by sherxon on 1/4/17.
+ */
+<span class="nc" id="L8">public class TopKFrequentElements {</span>
+    public List&lt;Integer&gt; topKFrequent(int[] a, int k) {
+<span class="nc" id="L10">        Map&lt;Integer,Integer&gt; map= new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L11" title="All 2 branches missed.">        for(int i:a){</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">            if (!map.containsKey(i)) map.put(i, 1);</span>
+<span class="nc" id="L13">            else map.put(i, map.get(i));</span>
+        }
+<span class="nc" id="L15">        TreeMap&lt;Integer, Set&lt;Integer&gt;&gt; tr= new TreeMap&lt;&gt;((c, b)-&gt;b.compareTo(c));</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        for(Integer ii:map.keySet()){</span>
+<span class="nc" id="L17">            Integer val=map.get(ii);</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            if(!tr.containsKey(val))</span>
+<span class="nc" id="L19">                tr.put(val, new HashSet&lt;&gt;());</span>
+<span class="nc" id="L20">            tr.get(val).add(ii);</span>
+        }
+
+<span class="nc" id="L23">        int i=0;</span>
+<span class="nc" id="L24">        List&lt;Integer&gt; list= new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        for (Integer integer : tr.keySet()) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            if(i&gt;=k)break;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            for(Integer num:tr.get(integer)){</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if(i&gt;=k)break;</span>
+<span class="nc" id="L29">                list.add(num);</span>
+<span class="nc" id="L30">                i++;</span>
+            }
+
+
+        }
+<span class="nc" id="L35">        return list;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

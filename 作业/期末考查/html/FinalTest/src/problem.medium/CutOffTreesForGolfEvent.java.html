@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CutOffTreesForGolfEvent.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">CutOffTreesForGolfEvent.java</span></div><h1>CutOffTreesForGolfEvent.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * 
+ */
+<span class="nc" id="L8">public class CutOffTreesForGolfEvent {</span>
+
+    public int cutOffTree(List&lt;List&lt;Integer&gt;&gt; forest) {
+<span class="nc" id="L11">        int count = 0;</span>
+        
+<span class="nc" id="L13">        PriorityQueue&lt;int[]&gt; q = new PriorityQueue&lt;&gt;((a, b) -&gt; a[2] - b[2]);</span>
+
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for (int i = 0; i &lt; forest.size(); i++) {</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            for (int j = 0; j &lt; forest.get(i).size(); j++) {</span>
+<span class="nc" id="L17">                int v = forest.get(i).get(j);</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">                if (v == 0)</span>
+<span class="nc" id="L19">                    continue;</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">                if (v &gt; 1)</span>
+<span class="nc" id="L21">                    q.add(new int[] { i, j, v });</span>
+            }
+        }
+<span class="nc" id="L24">        int[] current = new int[] { 0, 0, forest.get(0).get(0) };</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L26">            int[] p = q.remove();</span>
+<span class="nc" id="L27">            int cc = find(current, p, forest);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if (cc == -1)</span>
+<span class="nc" id="L29">                return -1;</span>
+<span class="nc" id="L30">            current = p;</span>
+<span class="nc" id="L31">            count += cc;</span>
+        }
+<span class="nc" id="L33">        return count;</span>
+    }
+
+<span class="nc" id="L36">    static int[][] dir = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };</span>
+
+    int find(int[] current, int[] target, List&lt;List&lt;Integer&gt;&gt; forest) {
+<span class="nc" id="L39">        int m = forest.size();</span>
+<span class="nc" id="L40">        int n = forest.get(0).size();</span>
+<span class="nc" id="L41">        boolean[][] visited = new boolean[m][n];</span>
+
+<span class="nc" id="L43">        Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L44">        q.add(current);</span>
+<span class="nc" id="L45">        int count = 0;</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L47">            int size = q.size();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc" id="L49">                int[] c = q.remove();</span>
+<span class="nc bnc" id="L50" title="All 4 branches missed.">                if (c[0] == target[0] &amp;&amp; c[1] == target[1])</span>
+<span class="nc" id="L51">                    return count;</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                for (int[] d : dir) {</span>
+<span class="nc" id="L54">                    int f = c[0] + d[0];</span>
+<span class="nc" id="L55">                    int s = c[1] + d[1];</span>
+<span class="nc bnc" id="L56" title="All 12 branches missed.">                    if (f &lt; 0 || s &lt; 0 || f &gt;= m || s &gt;= n || forest.get(f).get(s) == 0 || visited[f][s])</span>
+<span class="nc" id="L57">                        continue;</span>
+<span class="nc" id="L58">                    q.add(new int[] { f, s });</span>
+<span class="nc" id="L59">                    visited[f][s] = true;</span>
+                }
+            }
+<span class="nc" id="L62">            count++;</span>
+        }
+<span class="nc" id="L64">        return -1;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

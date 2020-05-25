@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ValidateBinarySearchTree.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">ValidateBinarySearchTree.java</span></div><h1>ValidateBinarySearchTree.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by sherxon on 1/5/17.
+ */
+<span class="nc" id="L11">public class ValidateBinarySearchTree {</span>
+
+    /**
+     * Solution 1:
+     * solution one building valid bst from preorder traversal of input tree and check if they are the same
+     */
+    public boolean isValidBST(TreeNode root) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (root == null) return true;</span>
+<span class="nc" id="L19">        List&lt;Integer&gt; prOrder = new ArrayList&lt;&gt;(); // hashset is more appropriate actually</span>
+<span class="nc" id="L20">        dfs(root, prOrder);</span>
+<span class="nc" id="L21">        TreeNode x = null;</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (Integer i : prOrder)</span>
+<span class="nc" id="L23">            x = insert(x, i);</span>
+<span class="nc" id="L24">        return isTheSameTree(x, root);</span>
+    }
+
+    boolean isTheSameTree(TreeNode x, TreeNode root) {
+<span class="nc bnc" id="L28" title="All 6 branches missed.">        if (x == null || root == null) return x == root;</span>
+<span class="nc bnc" id="L29" title="All 6 branches missed.">        return x.val == root.val &amp;&amp; isTheSameTree(x.left, root.left) &amp;&amp; isTheSameTree(x.right, root.right);</span>
+    }
+
+    TreeNode insert(TreeNode x, int val) {
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (x == null) return new TreeNode(val);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (x.val &lt;= val)</span>
+<span class="nc" id="L35">            x.right = insert(x.right, val);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        else if (x.val &gt; val)</span>
+<span class="nc" id="L37">            x.left = insert(x.left, val);</span>
+<span class="nc" id="L38">        return x;</span>
+    }
+
+    void dfs(TreeNode x, List&lt;Integer&gt; list) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (x == null) return;</span>
+<span class="nc" id="L43">        list.add(x.val);</span>
+<span class="nc" id="L44">        dfs(x.left, list);</span>
+<span class="nc" id="L45">        dfs(x.right, list);</span>
+<span class="nc" id="L46">    }</span>
+
+    /**
+     * Solution 2
+     * Basically what I am doing is recursively iterating over the tree while defining interval &lt;minVal, maxVal&gt; for each node which value must fit in.
+     * */
+    public boolean isValidBST2(TreeNode root) {
+<span class="nc" id="L53">        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);</span>
+    }
+
+    public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (root == null) return true;</span>
+<span class="nc bnc" id="L58" title="All 4 branches missed.">        if (root.val &gt;= maxVal || root.val &lt;= minVal) return false;</span>
+<span class="nc bnc" id="L59" title="All 4 branches missed.">        return isValidBST(root.left, minVal, root.val) &amp;&amp; isValidBST(root.right, root.val, maxVal);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

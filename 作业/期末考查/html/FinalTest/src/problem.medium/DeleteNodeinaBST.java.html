@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>DeleteNodeinaBST.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">DeleteNodeinaBST.java</span></div><h1>DeleteNodeinaBST.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.TreeNode;
+
+/**
+ * Created by sherxon on 1/12/17.
+ */
+<span class="nc" id="L8">public class DeleteNodeinaBST {</span>
+
+    public TreeNode deleteNode(TreeNode root, int key) {
+<span class="nc bnc" id="L11" title="All 2 branches missed.">        if (root == null) return null;</span>
+<span class="nc bnc" id="L12" title="All 6 branches missed.">        if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == key) return null;</span>
+<span class="nc" id="L13">        root = remove(root, root, key);</span>
+<span class="nc" id="L14">        return root;</span>
+    }
+
+    TreeNode remove(TreeNode x, TreeNode parent, int key) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (x == null) return null; // base case</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (x.val &gt; key)</span>
+<span class="nc" id="L20">            remove(x.left, x, key); // search from left</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        else if (x.val &lt; key)</span>
+<span class="nc" id="L22">            remove(x.right, x, key); // search from right</span>
+        else { // found, now remove it
+<span class="nc bnc" id="L24" title="All 4 branches missed.">            if (x.left == null &amp;&amp; x.right == null) { // case 1: when the node has no children</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">                if (parent.left == x) parent.left = null;</span>
+<span class="nc" id="L26">                else parent.right = null;</span>
+<span class="nc bnc" id="L27" title="All 4 branches missed.">            } else if (x.left != null &amp;&amp; x.right != null) { // when the node has two children</span>
+<span class="nc" id="L28">                TreeNode successor = x.right;</span>
+<span class="nc" id="L29">                parent = x;</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">                while (successor.left != null) {</span>
+<span class="nc" id="L31">                    parent = successor;</span>
+<span class="nc" id="L32">                    successor = successor.left;</span>
+                }
+<span class="nc" id="L34">                x.val = successor.val;</span>
+<span class="nc" id="L35">                remove(successor, parent, key);</span>
+<span class="nc" id="L36">            } else {                                        // when the node has only one child</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                if (parent == x) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                    x = parent.left == null ? parent.right : parent.left;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                } else if (x.left == null) {</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                    if (parent.left == x) parent.left = x.right;</span>
+<span class="nc" id="L41">                    else parent.right = x.right;</span>
+<span class="nc" id="L42">                } else {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                    if (parent.left == x) parent.left = x.left;</span>
+<span class="nc" id="L44">                    else parent.right = x.left;</span>
+                }
+            }
+        }
+<span class="nc" id="L48">        return x;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

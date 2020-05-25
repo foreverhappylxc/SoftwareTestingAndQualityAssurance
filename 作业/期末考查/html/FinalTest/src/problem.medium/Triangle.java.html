@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.List;
+
+/**
+ * Created by sherxon on 2/14/17.
+ */
+<span class="nc" id="L8">public class Triangle {</span>
+    public static void main(String[] args) {
+
+<span class="nc" id="L11">    }</span>
+
+    public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (triangle.size() == 0) return 0;</span>
+<span class="nc" id="L15">        int min = Integer.MAX_VALUE;</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if (triangle.size() == 1) {</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            for (int i = 0; i &lt; triangle.get(0).size(); i++) {</span>
+<span class="nc" id="L18">                min = Math.min(triangle.get(0).get(i), min);</span>
+            }
+        }
+
+
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        for (int i = 1; i &lt; triangle.size(); i++) {</span>
+<span class="nc" id="L24">            List&lt;Integer&gt; prev = triangle.get(i - 1);</span>
+<span class="nc" id="L25">            List&lt;Integer&gt; current = triangle.get(i);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            for (int j = 1; j &lt; current.size(); j++) {</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">                if (j == 0) {</span>
+<span class="nc" id="L28">                    current.set(j, prev.get(j) + current.get(j));</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                } else if (j == current.size() - 1) {</span>
+<span class="nc" id="L30">                    current.set(j, prev.get(j - 1) + current.get(j));</span>
+<span class="nc" id="L31">                } else {</span>
+<span class="nc" id="L32">                    int minPrev = Math.min(prev.get(j), prev.get(j - 1));</span>
+<span class="nc" id="L33">                    current.set(j, minPrev + current.get(j));</span>
+                }
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                if (i == triangle.size() - 1) {</span>
+<span class="nc" id="L36">                    min = Math.min(current.get(j), min);</span>
+                }
+            }
+
+        }
+
+<span class="nc" id="L42">        return min;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

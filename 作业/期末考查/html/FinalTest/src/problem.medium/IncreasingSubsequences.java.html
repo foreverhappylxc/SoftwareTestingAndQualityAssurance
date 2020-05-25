@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>IncreasingSubsequences.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">IncreasingSubsequences.java</span></div><h1>IncreasingSubsequences.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by sherxon on 1/21/17.
+ */
+<span class="nc" id="L11">public class IncreasingSubsequences {</span>
+    static List&lt;List&lt;Integer&gt;&gt; findSubsequences(int[] nums) {
+<span class="nc" id="L13">        List&lt;List&lt;Integer&gt;&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L14">        boolean[] a = new boolean[nums.length];</span>
+<span class="nc" id="L15">        Set&lt;String&gt; set = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L16">        perm(nums, a, a.length, list, set);</span>
+<span class="nc" id="L17">        return list;</span>
+    }
+
+    private static void perm(int[] nums, boolean[] a, int i, List&lt;List&lt;Integer&gt;&gt; list, Set&lt;String&gt; set) {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (i == 0) {</span>
+<span class="nc" id="L22">            List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L23">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            for (int j = 0; j &lt; a.length; j++)</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">                if (a[j]) {</span>
+<span class="nc" id="L26">                    l.add(nums[j]);</span>
+<span class="nc" id="L27">                    sb.append(nums[j]).append(&quot;,&quot;);</span>
+                }
+<span class="nc bnc" id="L29" title="All 4 branches missed.">            if (check(l) &amp;&amp; set.add(sb.toString()))</span>
+<span class="nc" id="L30">                list.add(l);</span>
+<span class="nc" id="L31">        } else {</span>
+<span class="nc" id="L32">            a[i] = true;</span>
+<span class="nc" id="L33">            perm(nums, a, i - 1, list, set);</span>
+<span class="nc" id="L34">            a[i - 1] = false;</span>
+<span class="nc" id="L35">            perm(nums, a, i - 1, list, set);</span>
+        }
+
+
+<span class="nc" id="L39">    }</span>
+
+    private static boolean check(List&lt;Integer&gt; l) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (l.size() &lt; 2) return false;</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        for (int i = 1; i &lt; l.size(); i++) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (l.get(i) &lt; l.get(i - 1)) return false;</span>
+        }
+<span class="nc" id="L46">        return true;</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

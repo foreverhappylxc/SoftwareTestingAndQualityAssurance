@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>LicenseKeyFormatting.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">LicenseKeyFormatting.java</span></div><h1>LicenseKeyFormatting.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+/**
+ * Created by sherxon on 1/7/17.
+ */
+<span class="nc" id="L6">public class LicenseKeyFormatting {</span>
+
+    public static String licenseKeyFormatting(String s, int k) {
+<span class="nc bnc" id="L9" title="All 4 branches missed.">        if (k==0 || s.length()==0)return s;</span>
+<span class="nc" id="L10">        StringBuilder sb =new StringBuilder();</span>
+<span class="nc" id="L11">        StringBuilder sb2 =new StringBuilder();</span>
+<span class="nc" id="L12">        char[] ch=s.toCharArray();</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        for (int i = 0; i &lt; ch.length; i++) {</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">            if(ch[i]!='-') sb.append(Character.toUpperCase(ch[i]));</span>
+        }
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if(sb.length()==0)return &quot;&quot;;</span>
+<span class="nc" id="L17">        int rem=sb.length()%k;</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if(rem&gt;0){</span>
+<span class="nc" id="L19">            sb2.append(sb.substring(0, rem));</span>
+<span class="nc" id="L20">            sb2.append(&quot;-&quot;);</span>
+        }
+<span class="nc" id="L22">        int j=1;</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        for (int i = rem; i &lt; sb.length(); i++) {</span>
+<span class="nc" id="L24">            sb2.append(sb.charAt(i));</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            if(++j%k==0)sb2.append(&quot;-&quot;);</span>
+        }
+
+<span class="nc" id="L28">        return sb2.substring(0, sb2.length()-1);</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

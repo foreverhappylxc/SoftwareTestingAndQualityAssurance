@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SubsetsII.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">SubsetsII.java</span></div><h1>SubsetsII.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * Created by sherxon on 1/24/17.
+ */
+<span class="nc" id="L9">public class SubsetsII {</span>
+
+    public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(int[] nums) {
+<span class="nc" id="L12">        List&lt;List&lt;Integer&gt;&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        if (nums.length == 0) return list;</span>
+<span class="nc" id="L14">        Arrays.sort(nums);</span>
+<span class="nc" id="L15">        Set&lt;String&gt; set = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L16">        boolean[] b = new boolean[nums.length];</span>
+<span class="nc" id="L17">        find(nums, b, 0, list, set);</span>
+<span class="nc" id="L18">        System.out.println(list);</span>
+<span class="nc" id="L19">        return list;</span>
+    }
+
+    void find(int[] a, boolean[] b, int n, List&lt;List&lt;Integer&gt;&gt; list, Set&lt;String&gt; set) {
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (n == a.length - 1) {</span>
+<span class="nc" id="L24">            List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            for (int i = 0; i &lt; b.length; i++)</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                if (b[i]) l.add(a[i]);</span>
+
+<span class="nc" id="L28">            StringBuilder sb = new StringBuilder(l.stream().map(String::valueOf).collect(Collectors.joining(&quot;,&quot;)));</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            if (set.add(sb.toString())) {</span>
+<span class="nc" id="L30">                System.out.println(sb);</span>
+<span class="nc" id="L31">                list.add(l);</span>
+<span class="nc" id="L32">                set.add(sb.reverse().toString());</span>
+            }
+<span class="nc" id="L34">        } else {</span>
+
+<span class="nc" id="L36">            b[n + 1] = true;</span>
+<span class="nc" id="L37">            find(a, b, n + 1, list, set);</span>
+
+<span class="nc" id="L39">            b[n + 1] = false;</span>
+<span class="nc" id="L40">            find(a, b, n + 1, list, set);</span>
+        }
+<span class="nc" id="L42">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

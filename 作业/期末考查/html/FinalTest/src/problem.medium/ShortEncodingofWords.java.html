@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ShortEncodingofWords.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">ShortEncodingofWords.java</span></div><h1>ShortEncodingofWords.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L10">public class ShortEncodingofWords {</span>
+
+<span class="nc" id="L12">    TrieNode root = new TrieNode('0');</span>
+<span class="nc" id="L13">    int res = 0;</span>
+
+    public int minimumLengthEncoding(String[] words) {
+<span class="nc bnc" id="L16" title="All 4 branches missed.">        if (words == null || words.length == 0)</span>
+<span class="nc" id="L17">            return 0;</span>
+<span class="nc" id="L18">        res = 0;</span>
+<span class="nc" id="L19">        root = new TrieNode('0');</span>
+<span class="nc" id="L20">        Arrays.sort(words, (a, b) -&gt; {</span>
+<span class="nc" id="L21">            int d = b.length() - a.length();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            if (d == 0)</span>
+<span class="nc" id="L23">                return b.compareTo(a);</span>
+<span class="nc" id="L24">            return d;</span>
+        });
+<span class="nc" id="L26">        Set&lt;String&gt; set = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        for (int i = 0; i &lt; words.length; i++) {</span>
+<span class="nc" id="L28">            addWord(words[i], set);</span>
+        }
+<span class="nc" id="L30">        return res;</span>
+    }
+
+    void addWord(String s, Set&lt;String&gt; set) {
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (!set.add(s))</span>
+<span class="nc" id="L35">            return;</span>
+<span class="nc" id="L36">        char[] a = s.toCharArray();</span>
+<span class="nc" id="L37">        TrieNode x = root;</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        for (int i = a.length - 1; i &gt;= 0; i--) {</span>
+<span class="nc" id="L39">            TrieNode child = x.children[a[i] - 'a'];</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (child == null) {</span>
+<span class="nc" id="L41">                child = new TrieNode(a[i]);</span>
+<span class="nc" id="L42">            } else {</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">                if (child.isWord &amp;&amp; child.count &gt; 0)</span>
+<span class="nc" id="L44">                    res -= i + 1;</span>
+<span class="nc" id="L45">                child.count++;</span>
+            }
+<span class="nc bnc" id="L47" title="All 4 branches missed.">            if (i == 0 &amp;&amp; !child.isWord) {</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                if (child.count == 0)</span>
+<span class="nc" id="L49">                    res += a.length;</span>
+<span class="nc" id="L50">                child.isWord = true;</span>
+            }
+<span class="nc" id="L52">            x.children[a[i] - 'a'] = child;</span>
+<span class="nc" id="L53">            x = child;</span>
+        }
+<span class="nc" id="L55">    }</span>
+
+    private class TrieNode {
+<span class="nc" id="L58">        TrieNode[] children = new TrieNode[26];</span>
+<span class="nc" id="L59">        int count = 0;</span>
+<span class="nc" id="L60">        boolean isWord = false;</span>
+
+<span class="nc" id="L62">        TrieNode(char v) {</span>
+<span class="nc" id="L63">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

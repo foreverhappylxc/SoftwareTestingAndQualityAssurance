@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MyCalendarTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.fhlxc.test</a> &gt; <span class="el_source">MyCalendarTest.java</span></div><h1>MyCalendarTest.java</h1><pre class="source lang-java linenums">package com.fhlxc.test;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import problem.medium.MyCalendar;
+
+/**
+* @author Xingchao Long
+* @date 2020年5月21日 下午9:52:44
+* @classname MyCalendarTest
+* @description
+* 测试MyCalendar的book方法
+*/
+
+@RunWith(Parameterized.class)
+public class MyCalendarTest {
+
+    MyCalendar myCalendar;
+    int start, end, anti;
+    Type type;
+    
+<span class="fc" id="L34">    enum Type {</span>
+<span class="fc" id="L35">        Empty,</span>
+<span class="fc" id="L36">        OneSize,</span>
+<span class="fc" id="L37">        NonEmpty,</span>
+<span class="fc" id="L38">        Error</span>
+    }
+<span class="fc" id="L40">    static List&lt;List&lt;Integer[]&gt;&gt; list = new ArrayList&lt;List&lt;Integer[]&gt;&gt;();</span>
+    
+    static {
+<span class="fc" id="L43">        list.add(null);</span>
+<span class="fc" id="L44">        List&lt;Integer[]&gt; tmp = new ArrayList&lt;Integer[]&gt;();</span>
+<span class="fc" id="L45">        tmp.add(new Integer[] {-4, 9});</span>
+<span class="fc" id="L46">        list.add(tmp);</span>
+<span class="fc" id="L47">        tmp = new ArrayList&lt;Integer[]&gt;();</span>
+<span class="fc" id="L48">        tmp.add(new Integer[] {9, 10});</span>
+<span class="fc" id="L49">        tmp.add(new Integer[] {-185, -100});</span>
+<span class="fc" id="L50">        tmp.add(new Integer[] {-89, 7});</span>
+<span class="fc" id="L51">        tmp.add(new Integer[] {13, 13});</span>
+<span class="fc" id="L52">        tmp.add(new Integer[] {24, 28});</span>
+<span class="fc" id="L53">        list.add(tmp);</span>
+<span class="fc" id="L54">    }</span>
+    
+    @Parameters
+    public static Collection&lt;?&gt; data() {
+<span class="fc" id="L58">        return Arrays.asList(new Object[][] {</span>
+<span class="fc" id="L59">            {Type.Empty, 10, 20, 1}, // 测试空map的时候</span>
+<span class="fc" id="L60">            {Type.OneSize, -7, -6, 1}, // 测试位于范围左边</span>
+<span class="fc" id="L61">            {Type.OneSize, 10, 12, 1}, // 测试位于范围右边</span>
+<span class="fc" id="L62">            {Type.OneSize, -6, -2, 0}, // 测试下边界相交</span>
+<span class="fc" id="L63">            {Type.OneSize, 8, 14, 0}, // 测试上边界相交</span>
+<span class="fc" id="L64">            {Type.OneSize, -2, 7, 0}, // 测试包含</span>
+<span class="fc" id="L65">            {Type.NonEmpty, 10, 12, 1}, // 测试一般值</span>
+<span class="fc" id="L66">            {Type.NonEmpty, 89, 88, 0}, // 测试start小于end的情况</span>
+<span class="fc" id="L67">            {Type.NonEmpty, 10, 12, 1}, // 测试上边界临界</span>
+<span class="fc" id="L68">            {Type.NonEmpty, 8, 9, 1}, // 测试下边界临界</span>
+<span class="fc" id="L69">            {Type.NonEmpty, -190, -183, 0}, // 测试下边界相交</span>
+<span class="fc" id="L70">            {Type.NonEmpty, 27, 30, 0}, // 测试上边界相交</span>
+<span class="fc" id="L71">            {Type.NonEmpty, 25, 26, 0}, // 测试内包含</span>
+<span class="fc" id="L72">            {Type.NonEmpty, -200, -90, 0}, // 测试外包含</span>
+<span class="fc" id="L73">            {Type.NonEmpty, 13, 13, 1}, // 测试特殊值</span>
+<span class="fc" id="L74">            {Type.NonEmpty, -200, -185, 1}, // 使分支覆盖率提升 </span>
+<span class="fc" id="L75">            {Type.NonEmpty, -200, -98, 0},</span>
+<span class="fc" id="L76">            {Type.NonEmpty, -120, -90, 0},</span>
+<span class="fc" id="L77">            {Type.Error, 4, 8, 1}, //为了覆盖率百分百添加的这个用例</span>
+        });
+    }
+    
+<span class="fc" id="L81">    public MyCalendarTest(Type type, int start, int end, int anti) {</span>
+<span class="fc" id="L82">        this.type = type;</span>
+<span class="fc" id="L83">        this.start = start;</span>
+<span class="fc" id="L84">        this.end = end;</span>
+<span class="fc" id="L85">        this.anti = anti;</span>
+<span class="fc" id="L86">    }</span>
+    
+    private void initMap(List&lt;Integer[]&gt; l, MyCalendar myCalendar) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (l == null) {</span>
+<span class="fc" id="L90">            return;</span>
+        }
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (Integer[] se: l) {</span>
+<span class="fc" id="L93">            myCalendar.book(se[0], se[1]);</span>
+        }
+<span class="fc" id="L95">    }</span>
+    
+    @Before
+    public void setUp() throws Exception {
+<span class="fc" id="L99">        myCalendar = new MyCalendar();</span>
+<span class="fc bfc" id="L100" title="All 4 branches covered.">        switch (type) {</span>
+        case Empty -&gt; 
+<span class="fc" id="L102">            initMap(list.get(Type.Empty.ordinal()), myCalendar);</span>
+        case NonEmpty -&gt;
+<span class="fc" id="L104">            initMap(list.get(Type.NonEmpty.ordinal()), myCalendar);</span>
+        case OneSize -&gt;
+<span class="fc" id="L106">            initMap(list.get(Type.OneSize.ordinal()), myCalendar);</span>
+        default -&gt;
+<span class="fc" id="L108">            throw new IllegalArgumentException(&quot;不符合题目的类型&quot;);</span>
+        }
+<span class="fc" id="L110">    }</span>
+
+    @After
+    public void tearDown() throws Exception {
+<span class="fc" id="L114">        myCalendar = null;</span>
+<span class="fc" id="L115">    }</span>
+
+    @Test
+    public void testBook() {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (anti == 1) {</span>
+<span class="fc" id="L120">            assertTrue(&quot;start: &quot; + start + &quot; end: &quot; + end + &quot; 期望值是true，但是输出了false&quot;, myCalendar.book(start, end));</span>
+<span class="fc" id="L121">        } else {</span>
+<span class="fc" id="L122">            assertFalse(&quot;start: &quot; + start + &quot; end: &quot; + end + &quot; 期望值是false，但是输出了true&quot;, myCalendar.book(start, end));</span>
+        }
+<span class="fc" id="L124">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

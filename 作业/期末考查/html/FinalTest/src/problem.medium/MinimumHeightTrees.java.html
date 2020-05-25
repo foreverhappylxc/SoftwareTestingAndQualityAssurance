@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MinimumHeightTrees.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">MinimumHeightTrees.java</span></div><h1>MinimumHeightTrees.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by sherxon on 1/25/17.
+ */
+<span class="nc" id="L11">public class MinimumHeightTrees {</span>
+
+    static List&lt;Integer&gt; findMinHeightTrees(int n, int[][] edges) {
+<span class="nc" id="L14">        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (n == 0) return list;</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        if (n == 1) {</span>
+<span class="nc" id="L17">            list.add(0);</span>
+<span class="nc" id="L18">            return list;</span>
+        }
+<span class="nc" id="L20">        List&lt;Set&lt;Integer&gt;&gt; sets = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int i = 0; i &lt; n; i++)</span>
+<span class="nc" id="L22">            sets.add(new HashSet&lt;&gt;());</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (int[] edge : edges) {</span>
+<span class="nc" id="L25">            sets.get(edge[0]).add(edge[1]);</span>
+<span class="nc" id="L26">            sets.get(edge[1]).add(edge[0]);</span>
+        }
+<span class="nc" id="L28">        List&lt;Integer&gt; leaves = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (int i = 0; i &lt; sets.size(); i++)</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (sets.get(i).size() == 1) leaves.add(i);</span>
+
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        while (n &gt; 2) {</span>
+<span class="nc" id="L34">            n -= leaves.size();</span>
+<span class="nc" id="L35">            List&lt;Integer&gt; newl = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            for (Integer leaf : leaves) {</span>
+<span class="nc" id="L37">                int i = sets.get(leaf).iterator().next();</span>
+<span class="nc" id="L38">                sets.get(i).remove(leaf);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                if (sets.get(i).size() == 2) newl.add(i);</span>
+            }
+<span class="nc" id="L41">            leaves = newl;</span>
+        }
+<span class="nc" id="L43">        return leaves;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

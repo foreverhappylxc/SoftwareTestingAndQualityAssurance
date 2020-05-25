@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SortList.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">SortList.java</span></div><h1>SortList.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.ListNode;
+
+/**
+ * Created by sherxon on 1/8/17.
+ */
+<span class="nc" id="L8">public class SortList {</span>
+    /**
+    * This is mergeSort algorithm for linked list. It divides list into two halves using two (slow, fast)
+    * pointer and sort each half.
+    * */
+    public ListNode sortList(ListNode head) {
+<span class="nc bnc" id="L14" title="All 4 branches missed.">        if (head == null || head.next == null) return head;</span>
+<span class="nc" id="L15">        ListNode slow = head;</span>
+<span class="nc" id="L16">        ListNode fast = head.next;</span>
+
+<span class="nc bnc" id="L18" title="All 4 branches missed.">        while (fast != null &amp;&amp; fast.next != null) { // slow in middle element</span>
+<span class="nc" id="L19">            slow = slow.next;</span>
+<span class="nc" id="L20">            fast = fast.next;</span>
+        }
+<span class="nc" id="L22">        ListNode start2 = slow.next;</span>
+<span class="nc" id="L23">        slow.next = null; // break the link</span>
+
+<span class="nc" id="L25">        ListNode start1 = sortList(head); // sort first half</span>
+<span class="nc" id="L26">        ListNode start11 = sortList(start2); // sort second half</span>
+
+<span class="nc" id="L28">        return merge(start1, start11); // merge sorted arrays</span>
+    }
+
+    ListNode merge(ListNode a, ListNode b) {
+<span class="nc" id="L32">        ListNode root = new ListNode(0); // helper node</span>
+<span class="nc" id="L33">        ListNode x = root;</span>
+<span class="nc bnc" id="L34" title="All 4 branches missed.">        while (a != null || b != null) {</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if (a == null) {</span>
+<span class="nc" id="L36">                x.next = b;</span>
+<span class="nc" id="L37">                b = b.next;</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            } else if (b == null) {</span>
+<span class="nc" id="L39">                x.next = a;</span>
+<span class="nc" id="L40">                a = a.next;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            } else if (a.val &lt;= b.val) {</span>
+<span class="nc" id="L42">                x.next = a;</span>
+<span class="nc" id="L43">                a = a.next;</span>
+<span class="nc" id="L44">            } else {</span>
+<span class="nc" id="L45">                x.next = b;</span>
+<span class="nc" id="L46">                b = b.next;</span>
+            }
+<span class="nc" id="L48">            x = x.next;</span>
+        }
+<span class="nc" id="L50">        return root.next;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

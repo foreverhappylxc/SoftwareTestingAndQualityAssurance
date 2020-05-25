@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>IsGraphBipartite.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">IsGraphBipartite.java</span></div><h1>IsGraphBipartite.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L8">public class IsGraphBipartite {</span>
+
+    public boolean isBipartite(int[][] graph) {
+<span class="nc" id="L11">        Map&lt;Integer, Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L12">        Map&lt;Integer, Boolean&gt; color = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L13">        Set&lt;Integer&gt; unvisited = new HashSet&lt;&gt;();</span>
+
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for (int i = 0; i &lt; graph.length; i++) {</span>
+<span class="nc" id="L16">            Set&lt;Integer&gt; nei = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            for (int j = i; j &lt; graph[i].length; j++) {</span>
+<span class="nc" id="L18">                nei.add(graph[i][j]);</span>
+            }
+<span class="nc" id="L20">            map.put(i, nei);</span>
+<span class="nc" id="L21">            unvisited.add(i);</span>
+        }
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        while (!unvisited.isEmpty()) {</span>
+<span class="nc" id="L25">            Integer next = unvisited.iterator().next();</span>
+<span class="nc" id="L26">            Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L27">            q.add(next);</span>
+<span class="nc" id="L28">            color.put(next, true);</span>
+<span class="nc" id="L29">            unvisited.remove(next);</span>
+
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            while (!q.isEmpty()) {</span>
+<span class="nc" id="L32">                Integer current = q.remove();</span>
+<span class="nc" id="L33">                boolean currentColor = color.get(current);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                for (Integer nei : map.get(current)) {</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                    if (unvisited.contains(nei)) {</span>
+<span class="nc" id="L36">                        unvisited.remove(nei);</span>
+<span class="nc" id="L37">                        q.add(nei);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                        color.put(nei, !currentColor);</span>
+                    }
+                }
+            }
+        }
+
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (Integer current : map.keySet()) {</span>
+<span class="nc" id="L45">            boolean currentColor = color.get(current);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            for (Integer nei : map.get(current)) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (currentColor == color.get(nei))</span>
+<span class="nc" id="L48">                    return false;</span>
+            }
+
+        }
+<span class="nc" id="L52">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

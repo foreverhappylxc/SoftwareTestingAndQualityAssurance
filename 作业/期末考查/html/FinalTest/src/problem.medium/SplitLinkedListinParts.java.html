@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SplitLinkedListinParts.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">SplitLinkedListinParts.java</span></div><h1>SplitLinkedListinParts.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.ListNode;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L8">public class SplitLinkedListinParts {</span>
+    public ListNode[] splitListToParts(ListNode root, int k) {
+<span class="nc bnc" id="L10" title="All 2 branches missed.">        if (root == null)</span>
+<span class="nc" id="L11">            return new ListNode[k];</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">        if (k == 1)</span>
+<span class="nc" id="L13">            return new ListNode[] { root };</span>
+<span class="nc" id="L14">        int count = 0;</span>
+<span class="nc" id="L15">        ListNode temp = root;</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        while (temp != null) {</span>
+<span class="nc" id="L17">            count++;</span>
+<span class="nc" id="L18">            temp = temp.next;</span>
+        }
+<span class="nc" id="L20">        int r = count % k;</span>
+<span class="nc" id="L21">        int n = count / k;</span>
+<span class="nc" id="L22">        ListNode[] a = new ListNode[k];</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (n == 0) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            for (int i = 0; i &lt; r; i++) {</span>
+<span class="nc" id="L25">                a[i] = root;</span>
+<span class="nc" id="L26">                temp = root.next;</span>
+<span class="nc" id="L27">                root.next = null;</span>
+<span class="nc" id="L28">                root = temp;</span>
+            }
+
+<span class="nc" id="L31">        } else {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            for (int i = 0; i &lt; k; i++) {</span>
+<span class="nc" id="L33">                int j = 0;</span>
+<span class="nc" id="L34">                temp = root;</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                while (j &lt;= n - 1) {</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                    if (root != null)</span>
+<span class="nc" id="L37">                        root = root.next;</span>
+<span class="nc" id="L38">                    j++;</span>
+                }
+<span class="nc bnc" id="L40" title="All 4 branches missed.">                if (r &gt; 0 &amp;&amp; root != null) {</span>
+<span class="nc" id="L41">                    r--;</span>
+<span class="nc" id="L42">                    root = root.next;</span>
+                }
+<span class="nc" id="L44">                a[i] = temp;</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                if (root != null) {</span>
+<span class="nc" id="L46">                    temp = root.next;</span>
+<span class="nc" id="L47">                    root.next = null;</span>
+                }
+<span class="nc" id="L49">                root = temp;</span>
+            }
+        }
+
+<span class="nc" id="L53">        return a;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

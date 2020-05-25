@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ConstructBinaryTreefromString.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">ConstructBinaryTreefromString.java</span></div><h1>ConstructBinaryTreefromString.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.TreeNode;
+
+import java.util.Stack;
+
+/**
+ * Created by sherxon on 3/11/17.
+ */
+<span class="nc" id="L10">public class ConstructBinaryTreefromString {</span>
+
+    static public TreeNode str2tree(String s) {
+<span class="nc bnc" id="L13" title="All 4 branches missed.">        if (s == null || s.length() == 0) return null;</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (s.indexOf('(') == -1) {</span>
+<span class="nc" id="L15">            return new TreeNode(Integer.parseInt(s));</span>
+        }
+<span class="nc" id="L17">        int r = Integer.parseInt(s.substring(0, s.indexOf('(', 0)));</span>
+
+<span class="nc" id="L19">        TreeNode root = new TreeNode(r);</span>
+<span class="nc" id="L20">        Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();</span>
+<span class="nc" id="L21">        stack.push(root);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 1; i &lt; s.length(); i++) {</span>
+<span class="nc" id="L23">            char c = s.charAt(i);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            if (c == '(') {</span>
+<span class="nc" id="L25">                int left = s.indexOf(')', i + 1);</span>
+<span class="nc" id="L26">                int right = s.indexOf('(', i + 1);</span>
+<span class="nc" id="L27">                int min = 0;</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if (left == -1) min = right;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                else if (right == -1) min = left;</span>
+<span class="nc" id="L30">                else min = Math.min(left, right);</span>
+
+<span class="nc" id="L32">                r = Integer.parseInt(s.substring(i + 1, min));</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                if (stack.peek().left == null) {</span>
+<span class="nc" id="L34">                    stack.peek().left = new TreeNode(r);</span>
+<span class="nc" id="L35">                    stack.push(stack.peek().left);</span>
+<span class="nc" id="L36">                } else {</span>
+<span class="nc" id="L37">                    stack.peek().right = new TreeNode(r);</span>
+<span class="nc" id="L38">                    stack.push(stack.peek().right);</span>
+                }
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            } else if (c == ')') {</span>
+<span class="nc" id="L41">                stack.pop();</span>
+            }
+        }
+<span class="nc" id="L44">        return root;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

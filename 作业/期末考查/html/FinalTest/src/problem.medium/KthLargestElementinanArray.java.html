@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>KthLargestElementinanArray.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">KthLargestElementinanArray.java</span></div><h1>KthLargestElementinanArray.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+<span class="nc" id="L3">public class KthLargestElementinanArray {</span>
+    /**
+    * This is quick select algorithm and average time complexity is O(N).
+    * We use k as a pivot.
+    * */
+    public int findKthLargest(int[] nums, int k) {
+<span class="nc" id="L9">        return partition(nums, 0, nums.length - 1, nums.length - k);</span>
+    }
+
+    /*
+    * This is main point. This method rearranges the array in a way that all elements less than pivot
+    * are on left side of pivot and others on right. It then returns index of the pivot element.
+    * */
+    int partition(int[] a, int lo, int hi, int k) {
+<span class="nc" id="L17">        int p = lo + (hi - lo) / 2;</span>
+<span class="nc" id="L18">        int storeIndex = lo;</span>
+<span class="nc" id="L19">        swap(a, p, hi);</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        for (int i = lo; i &lt;= hi; i++) {</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            if (a[i] &lt; a[hi]) {</span>
+<span class="nc" id="L22">                swap(a, i, storeIndex);</span>
+<span class="nc" id="L23">                storeIndex++;</span>
+            }
+        }
+
+<span class="nc" id="L27">        swap(a, storeIndex, hi);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (storeIndex == k)</span>
+<span class="nc" id="L29">            return a[storeIndex];</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        else if (k &lt; storeIndex)</span>
+<span class="nc" id="L31">            return partition(a, lo, storeIndex - 1, k);</span>
+        else
+<span class="nc" id="L33">            return partition(a, storeIndex + 1, hi, k);</span>
+    }
+
+    private void swap(int[] a, int i, int j) {
+<span class="nc" id="L37">        int temp = a[i];</span>
+<span class="nc" id="L38">        a[i] = a[j];</span>
+<span class="nc" id="L39">        a[j] = temp;</span>
+<span class="nc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

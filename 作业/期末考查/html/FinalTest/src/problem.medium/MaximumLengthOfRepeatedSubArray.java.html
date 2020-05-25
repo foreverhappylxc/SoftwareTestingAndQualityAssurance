@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MaximumLengthOfRepeatedSubArray.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">MaximumLengthOfRepeatedSubArray.java</span></div><h1>MaximumLengthOfRepeatedSubArray.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L11">public class MaximumLengthOfRepeatedSubArray {</span>
+
+    public int findLength(int[] a, int[] b) {
+<span class="nc bnc" id="L14" title="All 8 branches missed.">        if (a == null || b == null || a.length == 0 || b.length == 0)</span>
+<span class="nc" id="L15">            return 0;</span>
+<span class="nc" id="L16">        Map&lt;Integer, List&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            if (!map.containsKey(a[i]))</span>
+<span class="nc" id="L19">                map.put(a[i], new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L20">            map.get(a[i]).add(i);</span>
+        }
+<span class="nc" id="L22">        int max = 1;</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        for (int i = 0; i &lt; b.length; i++) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            if (map.containsKey(b[i])) {</span>
+<span class="nc" id="L25">                List&lt;Integer&gt; list = map.get(b[i]);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                for (Integer e : list) {</span>
+<span class="nc" id="L27">                    max = Math.max(max, count(e, a, i, b, max));</span>
+                }
+            }
+        }
+<span class="nc" id="L31">        return max;</span>
+    }
+
+    public int count(int i, int[] a, int e, int[] b, int max) {
+<span class="nc" id="L35">        int count = 0;</span>
+<span class="nc bnc" id="L36" title="All 6 branches missed.">        if (i + max &gt;= a.length || e + max &gt;= b.length || a[i + max] != b[e + max])</span>
+<span class="nc" id="L37">            return count;</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">        while (i &lt; a.length &amp;&amp; e &lt; b.length) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (a[i] != b[e])</span>
+<span class="nc" id="L40">                break;</span>
+<span class="nc" id="L41">            count++;</span>
+<span class="nc" id="L42">            i++;</span>
+<span class="nc" id="L43">            e++;</span>
+        }
+<span class="nc" id="L45">        return count;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

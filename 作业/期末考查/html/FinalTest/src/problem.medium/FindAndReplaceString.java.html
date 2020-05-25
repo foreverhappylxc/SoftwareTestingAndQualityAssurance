@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>FindAndReplaceString.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">FindAndReplaceString.java</span></div><h1>FindAndReplaceString.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L9">public class FindAndReplaceString {</span>
+
+    public String findReplaceString(String s, int[] indexes, String[] sources, String[] targets) {
+<span class="nc bnc" id="L12" title="All 4 branches missed.">        if (s == null || s.length() == 0)</span>
+<span class="nc" id="L13">            return s;</span>
+<span class="nc" id="L14">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L15">        Pair[] p = new Pair[indexes.length];</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        for (int i = 0; i &lt; p.length; i++) {</span>
+<span class="nc" id="L17">            p[i] = new Pair(i, indexes[i]);</span>
+        }
+<span class="nc" id="L19">        Arrays.sort(p, Comparator.comparingInt(a -&gt; a.val));</span>
+
+<span class="nc" id="L21">        int i = 0;</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int j = 0; j &lt; s.length(); j++) {</span>
+<span class="nc bnc" id="L23" title="All 4 branches missed.">            if (i &lt; p.length &amp;&amp; p[i].val == j) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">                if (s.substring(p[i].val, p[i].val + sources[p[i].id].length()).equals(sources[p[i].id])) {</span>
+<span class="nc" id="L25">                    sb.append(targets[p[i].id]);</span>
+<span class="nc" id="L26">                    j += sources[p[i].id].length() - 1;</span>
+<span class="nc" id="L27">                } else {</span>
+<span class="nc" id="L28">                    sb.append(s.charAt(i));</span>
+                }
+<span class="nc" id="L30">                i++;</span>
+<span class="nc" id="L31">            } else {</span>
+<span class="nc" id="L32">                sb.append(s.charAt(j));</span>
+            }
+        }
+
+<span class="nc" id="L36">        return sb.toString();</span>
+    }
+
+    class Pair {
+        int id, val;
+
+<span class="nc" id="L42">        Pair(int i, int v) {</span>
+<span class="nc" id="L43">            id = i;</span>
+<span class="nc" id="L44">            val = v;</span>
+<span class="nc" id="L45">        }</span>
+
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

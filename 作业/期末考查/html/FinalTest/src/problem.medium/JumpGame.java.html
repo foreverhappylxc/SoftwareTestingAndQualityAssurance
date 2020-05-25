@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>JumpGame.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">JumpGame.java</span></div><h1>JumpGame.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * Created by sherxon on 2/13/17.
+ */
+
+<span class="nc" id="L9">public class JumpGame {</span>
+
+    static boolean canJump(int[] a) {
+<span class="nc bnc" id="L12" title="All 2 branches missed.">        if (a.length == 0) return true;</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        if (a.length == 1) return true;</span>
+<span class="nc" id="L14">        int max = a[0];</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for (int i = 1; i &lt; a.length; i++) {</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            if (max &lt; i) return false;</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            if (max &gt;= a.length - 1) return true;</span>
+<span class="nc" id="L18">            max = Math.max(i + a[i], max);</span>
+        }
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        return max &gt;= a.length - 1;</span>
+    }
+
+    public boolean canJump2(int[] a) {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (a.length == 0) return true;</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (a.length == 1) return true;</span>
+<span class="nc" id="L26">        Map&lt;Integer, Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;(a.length);</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if (!map.containsKey(i)) {</span>
+<span class="nc" id="L29">                map.put(i, new HashSet&lt;&gt;());</span>
+            }
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            for (int j = i + 1; j &lt; a[i] + i; j++) {</span>
+<span class="nc" id="L32">                map.get(i).add(j);</span>
+            }
+        }
+
+
+<span class="nc" id="L37">        boolean[] visited = new boolean[a.length];</span>
+<span class="nc" id="L38">        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L39">        q.add(0);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L41">            Integer x = q.remove();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            for (Integer integer : map.get(x)) {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (integer == a.length - 1) return true;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                if (!visited[integer]) {</span>
+<span class="nc" id="L45">                    visited[integer] = true;</span>
+<span class="nc" id="L46">                    q.add(integer);</span>
+                }
+
+            }
+        }
+<span class="nc" id="L51">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

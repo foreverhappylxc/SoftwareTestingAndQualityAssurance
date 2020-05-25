@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AsteroidCollision.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">AsteroidCollision.java</span></div><h1>AsteroidCollision.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.Stack;
+
+<span class="nc" id="L5">public class AsteroidCollision {</span>
+
+    static public int[] asteroidCollision(int[] a) {
+<span class="nc" id="L8">        Stack&lt;Integer&gt; st = new Stack&lt;&gt;();</span>
+<span class="nc bnc" id="L9" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc" id="L10">            st.push(a[a.length - 1 - i]);</span>
+        }
+<span class="nc" id="L12">        Stack&lt;Integer&gt; st2 = new Stack&lt;&gt;();</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        while (!st.isEmpty()) {</span>
+<span class="nc" id="L14">            int pop = st.pop();</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">            if (st2.isEmpty()) {</span>
+<span class="nc" id="L16">                st2.add(pop);</span>
+<span class="nc" id="L17">                continue;</span>
+            }
+<span class="nc bnc" id="L19" title="All 4 branches missed.">            if ((pop &lt; 0 &amp;&amp; st2.peek() &gt; 0)) {</span>
+<span class="nc" id="L20">                int pop2 = st2.pop();</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">                if (Math.abs(pop2) &gt; Math.abs(pop)) {</span>
+<span class="nc" id="L22">                    st2.add(pop2);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">                } else if (Math.abs(pop2) &lt;= Math.abs(pop)) {</span>
+<span class="nc" id="L24">                    st.add(pop);</span>
+                }
+<span class="nc" id="L26">            } else {</span>
+<span class="nc" id="L27">                st2.add(pop);</span>
+            }
+        }
+<span class="nc" id="L30">        int[] res = new int[st2.size()];</span>
+<span class="nc" id="L31">        int k = 0;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        while (!st2.isEmpty()) {</span>
+<span class="nc" id="L33">            res[res.length - 1 - k] = st2.pop();</span>
+<span class="nc" id="L34">            k++;</span>
+        }
+<span class="nc" id="L36">        return res;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

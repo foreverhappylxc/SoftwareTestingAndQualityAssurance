@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeImportance.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">EmployeeImportance.java</span></div><h1>EmployeeImportance.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * Simple graph traversal problem
+ */
+<span class="nc" id="L8">public class EmployeeImportance {</span>
+<span class="nc" id="L9">    class Employee {</span>
+        // It's the unique id of each node;
+        // unique id of this employee
+        public int id;
+        // the importance value of this employee
+        public int importance;
+        // the id of direct subordinates
+        public List&lt;Integer&gt; subordinates;
+    }
+
+<span class="nc" id="L19">    int total = 0;</span>
+
+    public int getImportance(List&lt;Employee&gt; employees, int id) {
+
+<span class="nc bnc" id="L23" title="All 4 branches missed.">        if (employees == null || employees.isEmpty())</span>
+<span class="nc" id="L24">            return 0;</span>
+
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (employees.size() == 1)</span>
+<span class="nc" id="L27">            return employees.get(0).importance;</span>
+<span class="nc" id="L28">        Set&lt;Integer&gt; visited = new HashSet&lt;&gt;();</span>
+        
+<span class="nc" id="L30">        Map&lt;Integer, Employee&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (Employee e : employees) {</span>
+<span class="nc" id="L32">            map.put(e.id, e);</span>
+        }
+<span class="nc" id="L34">        total = 0;</span>
+<span class="nc" id="L35">        dfs(id, visited, map);</span>
+<span class="nc" id="L36">        return total;</span>
+    }
+
+    void dfs(int start, Set&lt;Integer&gt; visited, Map&lt;Integer, Employee&gt; map) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        for (Integer sub : map.get(start).subordinates) {</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (!visited.contains(sub)) {</span>
+<span class="nc" id="L42">                total += map.get(sub).importance;</span>
+<span class="nc" id="L43">                visited.add(sub);</span>
+<span class="nc" id="L44">                dfs(sub, visited, map);</span>
+            }
+        }
+<span class="nc" id="L47">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

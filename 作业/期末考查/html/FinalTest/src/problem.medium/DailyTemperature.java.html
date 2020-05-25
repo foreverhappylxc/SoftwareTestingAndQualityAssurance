@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>DailyTemperature.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">DailyTemperature.java</span></div><h1>DailyTemperature.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.*;
+
+/**
+ * Why Did you create this class? what does it do?
+ */
+<span class="nc" id="L8">public class DailyTemperature {</span>
+
+    static int[] dailyTemperatures(int[] a) {
+<span class="nc bnc" id="L11" title="All 4 branches missed.">        if (a == null || a.length == 0) {</span>
+<span class="nc" id="L12">            return a;</span>
+        }
+<span class="nc" id="L14">        TreeMap&lt;Integer, TreeSet&lt;Integer&gt;&gt; map = new TreeMap&lt;&gt;();</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            if (!map.containsKey(a[i]))</span>
+<span class="nc" id="L17">                map.put(a[i], new TreeSet&lt;&gt;());</span>
+<span class="nc" id="L18">            map.get(a[i]).add(i);</span>
+        }
+<span class="nc" id="L20">        int[] res = new int[a.length];</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc" id="L22">            Integer k = 0;</span>
+<span class="nc" id="L23">            Map.Entry&lt;Integer, TreeSet&lt;Integer&gt;&gt; entry = null;</span>
+<span class="nc" id="L24">            int search = a[i];</span>
+<span class="nc" id="L25">            int min = Integer.MAX_VALUE;</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            while ((entry = map.higherEntry(search)) != null) {</span>
+<span class="nc" id="L27">                k = entry.getValue().higher(i);</span>
+<span class="nc bnc" id="L28" title="All 4 branches missed.">                if (k != null &amp;&amp; k - i + 1 &gt; 0) {</span>
+<span class="nc" id="L29">                    min = Math.min(min, k - i);</span>
+                }
+<span class="nc" id="L31">                search = entry.getKey();</span>
+            }
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            res[i] = min == Integer.MAX_VALUE ? 0 : min;</span>
+        }
+
+<span class="nc" id="L36">        return res;</span>
+    }
+
+    static class Pair implements Comparable&lt;Object&gt; {
+        int index;
+        int value;
+
+<span class="nc" id="L43">        public Pair(int index, int value) {</span>
+<span class="nc" id="L44">            this.index = index;</span>
+<span class="nc" id="L45">            this.value = value;</span>
+<span class="nc" id="L46">        }</span>
+
+        @Override public int compareTo(Object o) {
+<span class="nc" id="L49">            Pair pair = (Pair) o;</span>
+<span class="nc" id="L50">            int d = this.value - pair.value;</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (d != 0)</span>
+<span class="nc" id="L52">                return d;</span>
+<span class="nc" id="L53">            return this.index - pair.index;</span>
+        }
+
+        @Override public boolean equals(Object o) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (this == o)</span>
+<span class="nc" id="L58">                return true;</span>
+<span class="nc bnc" id="L59" title="All 4 branches missed.">            if (o == null || getClass() != o.getClass())</span>
+<span class="nc" id="L60">                return false;</span>
+
+<span class="nc" id="L62">            Pair pair = (Pair) o;</span>
+
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (index != pair.index)</span>
+<span class="nc" id="L65">                return false;</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            return value == pair.value;</span>
+        }
+
+        @Override public int hashCode() {
+<span class="nc" id="L70">            int result = index;</span>
+<span class="nc" id="L71">            result = 31 * result + value;</span>
+<span class="nc" id="L72">            return result;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

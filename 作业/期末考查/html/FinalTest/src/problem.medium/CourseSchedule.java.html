@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CourseSchedule.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">CourseSchedule.java</span></div><h1>CourseSchedule.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by sherxon on 1/25/17.
+ */
+<span class="nc" id="L11">public class CourseSchedule {</span>
+
+    static boolean canFinish(int numCourses, int[][] prerequisites) {
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (numCourses &lt; 2) return true;</span>
+
+<span class="nc" id="L16">        List&lt;Set&lt;Integer&gt;&gt; sets = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        for (int i = 0; i &lt; numCourses; i++)</span>
+<span class="nc" id="L18">            sets.add(new HashSet&lt;&gt;());</span>
+
+<span class="nc" id="L20">        int[] inDegrees = new int[numCourses];</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int[] edge : prerequisites) {</span>
+<span class="nc" id="L22">            sets.get(edge[0]).add(edge[1]);</span>
+<span class="nc" id="L23">            inDegrees[edge[1]]++;</span>
+        }
+<span class="nc" id="L25">        boolean[] read = new boolean[numCourses];</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        for (int head = 0; head &lt; numCourses; head++) {</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            if (inDegrees[head] == 0) {</span>
+<span class="nc" id="L28">                boolean[] recStack = new boolean[numCourses];</span>
+<span class="nc" id="L29">                boolean[] visited = new boolean[numCourses];</span>
+<span class="nc" id="L30">                boolean hasCycle = topSort(sets, head, visited, recStack);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                for (int i = 0; i &lt; visited.length; i++) {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">                    if (visited[i]) read[i] = true;</span>
+                }
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                if (hasCycle) return false;</span>
+            }
+        }
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (int i = 1; i &lt; read.length; i++) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (!read[i]) return false;</span>
+        }
+<span class="nc" id="L40">        return true;</span>
+    }
+
+    private static boolean topSort(List&lt;Set&lt;Integer&gt;&gt; sets, Integer head, boolean[] visited, boolean[] recStack) {
+<span class="nc" id="L44">        visited[head] = true;</span>
+<span class="nc" id="L45">        recStack[head] = true;</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        for (Integer child : sets.get(head)) {</span>
+<span class="nc bnc" id="L47" title="All 4 branches missed.">            if (!visited[child] &amp;&amp; topSort(sets, child, visited, recStack))</span>
+<span class="nc" id="L48">                return true;</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            else if (recStack[child])</span>
+<span class="nc" id="L50">                return true;</span>
+        }
+<span class="nc" id="L52">        recStack[head] = false;</span>
+<span class="nc" id="L53">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

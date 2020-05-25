@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>LowestCommonAncestorofaBinaryTree.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">LowestCommonAncestorofaBinaryTree.java</span></div><h1>LowestCommonAncestorofaBinaryTree.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.TreeNode;
+
+import java.util.*;
+
+/**
+ * Created by sherxon on 3/2/17.
+ */
+<span class="nc" id="L10">public class LowestCommonAncestorofaBinaryTree {</span>
+    /**
+     * We first find path from root to p and from root to q nodes.
+     * Then we traverse both paths till the values in arrays are same.
+     * Return the common element just before the mismatch.
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        if (root == null) return null;</span>
+<span class="nc" id="L18">        Map&lt;TreeNode, TreeNode&gt; map = bfs(root);</span>
+<span class="nc" id="L19">        LinkedList&lt;TreeNode&gt; pPath = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L20">        TreeNode pp = p;</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        while (pp != null) {</span>
+<span class="nc" id="L22">            pPath.addFirst(pp);</span>
+<span class="nc" id="L23">            pp = map.get(pp);</span>
+        }
+<span class="nc" id="L25">        LinkedList&lt;TreeNode&gt; qPath = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L26">        TreeNode qq = q;</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        while (qq != null) {</span>
+<span class="nc" id="L28">            qPath.addFirst(qq);</span>
+<span class="nc" id="L29">            qq = map.get(qq);</span>
+        }
+<span class="nc" id="L31">        ListIterator&lt;TreeNode&gt; pit = pPath.listIterator();</span>
+<span class="nc" id="L32">        ListIterator&lt;TreeNode&gt; qit = qPath.listIterator();</span>
+<span class="nc bnc" id="L33" title="All 4 branches missed.">        while (pit.hasNext() &amp;&amp; qit.hasNext()) {</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            if (!pit.hasNext()) return pit.previous();</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if (!qit.hasNext()) return qit.previous();</span>
+<span class="nc" id="L36">            TreeNode pcurrent = pit.next();</span>
+<span class="nc" id="L37">            TreeNode qcurrent = qit.next();</span>
+
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (pcurrent != qcurrent) return map.get(pcurrent);</span>
+        }
+<span class="nc" id="L41">        return root;</span>
+    }
+
+    Map&lt;TreeNode, TreeNode&gt; bfs(TreeNode x) {
+<span class="nc" id="L45">        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L46">        q.add(x);</span>
+<span class="nc" id="L47">        Map&lt;TreeNode, TreeNode&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L48">        map.put(x, null);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        while (!q.isEmpty()) {</span>
+<span class="nc" id="L50">            TreeNode xx = q.remove();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (xx.left != null) {</span>
+<span class="nc" id="L52">                q.add(xx.left);</span>
+<span class="nc" id="L53">                map.put(xx.left, xx);</span>
+            }
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (xx.right != null) {</span>
+<span class="nc" id="L56">                q.add(xx.right);</span>
+<span class="nc" id="L57">                map.put(xx.right, xx);</span>
+            }
+        }
+<span class="nc" id="L60">        return map;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>NextPermutation.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">NextPermutation.java</span></div><h1>NextPermutation.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import java.util.Arrays;
+
+/**
+ * Created by sherxon on 4/28/17.
+ */
+<span class="nc" id="L8">public class NextPermutation {</span>
+    /**
+    * Solution Idea, first find an element whose left element is smaller than its value
+    * then walk through the array from current index to find min element that is also larger than current element
+    * swap min element with current element and sort the array from current index to end
+    * */
+    public void nextPermutation(int[] nums) {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        for(int i=nums.length-1; i&gt;0; i--){</span>
+
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            if(nums[i] &gt; nums[i-1]){</span>
+
+<span class="nc" id="L19">                int min=Integer.MAX_VALUE;</span>
+<span class="nc" id="L20">                int mini=i-1;</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">                for(int j=i; j&lt;nums.length; j++){</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">                    if(nums[j] &lt; nums[i-1])continue;</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">                    if(nums[j] &lt; min){</span>
+<span class="nc" id="L25">                        min=nums[j];</span>
+<span class="nc" id="L26">                        mini=j;</span>
+                    }
+                }
+
+<span class="nc" id="L30">                int temp=nums[i-1];</span>
+<span class="nc" id="L31">                nums[i-1]=nums[mini];</span>
+<span class="nc" id="L32">                nums[mini]=temp;</span>
+<span class="nc" id="L33">                Arrays.sort(nums, i, nums.length);</span>
+<span class="nc" id="L34">                return;</span>
+            }
+        }
+<span class="nc" id="L37">        Arrays.sort(nums);</span>
+<span class="nc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

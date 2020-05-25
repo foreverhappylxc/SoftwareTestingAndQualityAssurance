@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BeautifulArrangement.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">BeautifulArrangement.java</span></div><h1>BeautifulArrangement.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+/**
+ * @author Sherali Obidov.
+ */
+<span class="nc" id="L6">public class BeautifulArrangement {</span>
+<span class="nc" id="L7">        int count=0;</span>
+        public int countArrangement(int n) {
+<span class="nc bnc" id="L9" title="All 2 branches missed.">            if(n&lt;=2)return n;</span>
+<span class="nc" id="L10">            int[] a= new int[n+1];</span>
+<span class="nc bnc" id="L11" title="All 2 branches missed.">            for (int i = 0; i &lt; a.length; i++) {</span>
+<span class="nc" id="L12">                a[i]=i;</span>
+            }
+<span class="nc" id="L14">            go(a, 1);</span>
+<span class="nc" id="L15">            return count;</span>
+        }
+        void go(int[] a, int n){
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            if(n&gt;a.length) return;</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">            if(n==a.length){</span>
+<span class="nc" id="L20">                boolean f=true;</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">                for (int i = 1; i &lt; a.length; i++) {</span>
+<span class="nc bnc" id="L22" title="All 4 branches missed.">                    if(a[i]%i!=0 &amp;&amp; i%a[i]!=0){</span>
+<span class="nc" id="L23">                        f=false;</span>
+                    }
+<span class="nc bnc" id="L25" title="All 2 branches missed.">                    if(!f)break;</span>
+                }
+<span class="nc bnc" id="L27" title="All 2 branches missed.">                if(f){</span>
+<span class="nc" id="L28">                    count++;</span>
+                }
+<span class="nc" id="L30">            }else{</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                for (int i = n; i &lt;a.length ; i++) {</span>
+<span class="nc bnc" id="L32" title="All 4 branches missed.">                    if(a[i]%n==0 &amp;&amp; n%a[i]==0){</span>
+<span class="nc" id="L33">                        swap(a, i, n);</span>
+<span class="nc" id="L34">                        go(a, n+1);</span>
+<span class="nc" id="L35">                        swap(a, n, i);</span>
+                    }
+
+                }
+            }
+
+<span class="nc" id="L41">        }</span>
+        void swap(int[] a, int i, int n) {
+<span class="nc" id="L43">            int temp=a[i];</span>
+<span class="nc" id="L44">            a[i]=a[n];</span>
+<span class="nc" id="L45">            a[n]=temp;</span>
+
+<span class="nc" id="L47">        }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

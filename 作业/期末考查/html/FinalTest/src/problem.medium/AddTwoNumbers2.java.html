@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AddTwoNumbers2.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">AddTwoNumbers2.java</span></div><h1>AddTwoNumbers2.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.ListNode;
+
+import java.util.Stack;
+
+/**
+ * Created by sherxon on 1/1/17.
+ */
+// this can be solved without using any stack
+// find size of both lists O(N) and find nodes in the same length and recursively add
+// use bottom up recursive to add numbers
+<span class="nc" id="L13">public class AddTwoNumbers2 {</span>
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+<span class="nc" id="L15">        Stack&lt;ListNode&gt; s1=new Stack&lt;&gt;();</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        while(l1!=null){</span>
+<span class="nc" id="L17">            s1.add(l1);</span>
+<span class="nc" id="L18">            l1=l1.next;</span>
+        }
+<span class="nc" id="L20">        Stack&lt;ListNode&gt; s2=new Stack&lt;&gt;();</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        while(l2!=null){</span>
+<span class="nc" id="L22">            s2.add(l2);</span>
+<span class="nc" id="L23">            l2=l2.next;</span>
+        }
+<span class="nc" id="L25">        int carry=0;</span>
+<span class="nc" id="L26">        ListNode x=null;</span>
+
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        while( !s1.isEmpty() || !s2.isEmpty() ){</span>
+<span class="nc" id="L29">            int val=0;</span>
+<span class="nc bnc" id="L30" title="All 4 branches missed.">            if(s1.isEmpty() &amp;&amp; !s2.isEmpty()){</span>
+<span class="nc" id="L31">                val=s2.pop().val + carry;</span>
+<span class="nc bnc" id="L32" title="All 4 branches missed.">            }else if(s2.isEmpty() || !s1.isEmpty()){</span>
+<span class="nc" id="L33">                val=s1.pop().val + carry;</span>
+<span class="nc" id="L34">            }else{</span>
+<span class="nc" id="L35">                val=s2.pop().val + carry + s1.pop().val;</span>
+            }
+
+<span class="nc" id="L38">            carry=val/10;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if(x==null){</span>
+<span class="nc" id="L40">                x=new ListNode(val%10);</span>
+<span class="nc" id="L41">            }else{</span>
+<span class="nc" id="L42">                ListNode nn=new ListNode(val%10);</span>
+<span class="nc" id="L43">                nn.next=x;</span>
+<span class="nc" id="L44">                x=nn;</span>
+            }
+        }
+<span class="nc bnc" id="L47" title="All 2 branches missed.">         if(carry&gt;0){</span>
+<span class="nc" id="L48">             ListNode nn=new ListNode(carry);</span>
+<span class="nc" id="L49">             nn.next=x;</span>
+<span class="nc" id="L50">             x=nn;</span>
+         }
+
+<span class="nc" id="L53">        return x;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>

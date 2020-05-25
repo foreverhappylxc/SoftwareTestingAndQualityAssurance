@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ReverseLinkedListII.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">MyCalendarTest (2020年5月25日 下午4:29:07)</a> &gt; <a href="../../index.html" class="el_group">FinalTest</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">problem.medium</a> &gt; <span class="el_source">ReverseLinkedListII.java</span></div><h1>ReverseLinkedListII.java</h1><pre class="source lang-java linenums">package problem.medium;
+
+import problems.utils.ListNode;
+
+/**
+ * Created by sherxon on 1/8/17.
+ */
+<span class="nc" id="L8">public class ReverseLinkedListII {</span>
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+<span class="nc bnc" id="L10" title="All 4 branches missed.">        if(head==null || m==n)return head;</span>
+<span class="nc" id="L11">        ListNode mm=null;</span>
+<span class="nc" id="L12">        ListNode nn=null;</span>
+<span class="nc" id="L13">        ListNode x=head;</span>
+<span class="nc" id="L14">        ListNode prevofm=null;</span>
+<span class="nc" id="L15">        for(int i=0; ; i++){</span>
+<span class="nc bnc" id="L16" title="All 2 branches missed.">            if(i==m-1)prevofm=x;</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">            if(i==m)mm=x;</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">            if(i==n)nn=x;</span>
+<span class="nc bnc" id="L19" title="All 4 branches missed.">            if(nn!=null &amp;&amp; mm!=null)break;</span>
+<span class="nc" id="L20">            x=x.next;</span>
+        }
+
+<span class="nc" id="L23">        ListNode nextofn=nn.next;</span>
+<span class="nc" id="L24">        nn.next=null;</span>
+<span class="nc" id="L25">        mm=reverse(mm);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if(prevofm!=null)prevofm.next=nn;</span>
+<span class="nc" id="L27">        mm.next=nextofn;</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if(m==1)head=nn;</span>
+<span class="nc" id="L30">        return head;</span>
+    }
+    ListNode reverse(ListNode x){
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(x==null)return null;</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if(x.next==null)return x;</span>
+<span class="nc" id="L35">        ListNode q=reverse(x.next);</span>
+<span class="nc" id="L36">        q.next=x;</span>
+<span class="nc" id="L37">        return x;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>MyCalendarTest (2020年5月25日 下午4:29:07)</div></body></html>
